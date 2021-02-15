@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Player1
+  - Player2
+  - Player3
+  - Player4
+  - RO1
+  - RO2
+  - RO3
+  - RO4
   layers:
   - Default
   - TransparentFX

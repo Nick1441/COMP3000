@@ -52,22 +52,5 @@ public class PlayerMovement : MonoBehaviour
 
         }
         MoveAllowed = false;
-
-        //if (WayPointNumber <= WayPoint.Length - 2)
-        //{
-        //    WayPointNumber = WayPointNumber + 1;
-
-
-        //    //Glides To Each One.
-        //    //transform.position = Vector3.MoveTowards(transform.position, WayPoint[WayPointNumber].transform.position, MoveSpeed * Time.deltaTime);
-
-
-        //}
-        //else
-        //{
-        //    WayPointNumber = 0;
-        //}
-        ////transform.position = WayPoint[WayPointNumber].transform.position;
-        //transform.position = Vector3.MoveTowards(transform.position, WayPoint[WayPointNumber].transform.position, MoveSpeed * Time.deltaTime);
     }
 }

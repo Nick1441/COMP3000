@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class PlayerPickerManager : MonoBehaviour
 {
@@ -94,6 +95,8 @@ public class PlayerPickerManager : MonoBehaviour
 
             PlayerPrefs.SetInt("PCount", 4);
         }
+
+        SceneManager.LoadScene("MainGame");
     }
 
 
