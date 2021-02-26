@@ -10,47 +10,43 @@ public class PlayerMovement : MonoBehaviour
     public bool MoveAllowed = false;
     public int Moves = 0;
 
+    public int NumToMove = 0;
+    public bool Moving = false;
+    public bool Moved = false;
+    bool test = true;
     void Start()
     {
-        transform.position = WayPoint[WayPointNumber].transform.position;
+        //transform.position = WayPoint[WayPointNumber].transform.position;
     }
 
-    // Update is called once per frame
     void Update()
-    {   
-        if (MoveAllowed == true)
+    {
+        Movement();
+        PlayerMove();
+    }
+
+    public void PlayerMove()
+    {
+        if (transform.position != WayPoint[WayPointNumber].transform.position)
         {
-            MovePlayer();
+            Moved = false;
+            transform.position = Vector3.MoveTowards(transform.position, WayPoint[WayPointNumber].transform.position, MoveSpeed * Time.deltaTime);
+            Debug.Log("Moving");
         }
-
-        if (Input.GetKeyDown("w"))
+        else
         {
-            MoveAllowed = true;
-
-        }
-
-        if (Input.GetKeyDown("e"))
-        {
-            MoveAllowed = false;
+            Moved = true;
+            //Moved = false;
+            Debug.Log("Moved");
         }
     }
 
-    public void MovePlayer()
+    void Movement()
     {
-        for (int i = 0; i <= Moves - 1;)
+        if (Moved && NumToMove != 0)
         {
-            if (WayPointNumber <= WayPoint.Length - 1)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, WayPoint[WayPointNumber].transform.position, MoveSpeed * Time.deltaTime);
-
-                if (transform.position == WayPoint[WayPointNumber].transform.position)
-                {
-                    WayPointNumber += 1;
-                    i++;
-                }
-            }
-
+            NumToMove--;
+            WayPointNumber++;
         }
-        MoveAllowed = false;
     }
 }
