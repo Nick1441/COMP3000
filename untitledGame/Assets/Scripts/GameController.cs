@@ -28,6 +28,10 @@ public class GameController : MonoBehaviour
     bool FirstRollCompleted = false;
 
     public int i;
+
+
+    public int Player;
+    public int Movess;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,9 +46,6 @@ public class GameController : MonoBehaviour
         Player4Info.RollOrder = GameObject.FindGameObjectWithTag("RO4");
 
         PlayerAmount = PlayerPrefs.GetInt("PCount");
-
-
-
 
         CreatePlayers();
     }
@@ -118,48 +119,14 @@ public class GameController : MonoBehaviour
 
     public void Order()
     {
-        ReOrder(2, 0);
-        //ReOrder(0, 0);
+        ReOrder(Movess, Player);
     }
 
 
     public void ReOrder(int Moves, int Player)
     {
-        //Debug.Log(Moves);
-        //Debug.Log(Player);
-
-        //for (i = 0; i <= Moves; i++)  //GOES UP BEFORE IT GETS TO NEXT ONE?
-        //{
-        PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().NumToMove = Moves;
-        //Debug.Log(PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().Moved);
-
-        ////As clicked once, always clicked.
-        //if (PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().Moved == true)
-        //{
-        //    PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().Moved = false;
-        //    if (Moves > 0)
-        //    {
-        //        ReOrder(Moves - 1, 0);
-        //    }
-            
-        //}
-        //}
-
-        //i = 0;
-        //while (i <= Moves)
-        //{
-        //    Debug.Log(i);
-        //    PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber++;
-
-        //    if (PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().Moved == true)
-        //    {
-        //        //i++;  //ONLY WANT IT TO INCREASE HERE NOT ALWAYS
-        //        PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().Moved = false;
-        //        i++;
-        //    }
-        //}
-
-        //CHANGE IT FROM A FOR TO IF? OR WHILE> AS THEY DONT WAIT FOR THEM TO SORT ITSELF OUT?
+        PlayerList[Player].PlayerObject.GetComponent<PlayerMovement>().NumToMove = Moves;
+        this.GetComponent<CameraController>().SetCamera(Player);
     }
 
 
