@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.Events;
 
+[System.Serializable]
+public class OnCameraChange : UnityEvent<int> { }
 public class GameController : MonoBehaviour
 {
     //Creating Player Info
@@ -14,24 +17,33 @@ public class GameController : MonoBehaviour
 
     List<Player> PlayerList = new List<Player>();
 
+    Player TempPlayer = new Player();
+    public OnCameraChange CamChange;
     //Setting Paramaters
     int PlayerAmount;
     int CurrentTurn = 1;
-    bool Input;
+    //bool Input;
 
     public GameObject RollButton;
     public Text TextDie;
     //public GameObject Player1;
-
+    int Rolled = 0;
     public int Die = 0;
     int FirstRollInt = 0;
     bool FirstRollCompleted = false;
+    public Text MovesLeftText;
+    public Text MovesLeftText2;
+    bool FirstRoll = true;
 
     public int i;
-
+    public GameObject RollNextGameObject;
+    public Text RollNextText;
 
     public int Player;
     public int Movess;
+
+    public bool RollLoopBool = false;
+    public int RollLoopInt = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +76,11 @@ public class GameController : MonoBehaviour
         Player2Info.Name = PlayerPrefs.GetString("P2Name");
         Player3Info.Name = PlayerPrefs.GetString("P3Name");
         Player4Info.Name = PlayerPrefs.GetString("P4Name");
+
+        Player1Info.PlayerNumber = 1;
+        Player2Info.PlayerNumber = 2;
+        Player3Info.PlayerNumber = 3;
+        Player4Info.PlayerNumber = 4;
 
         PlayerList.Add(Player1Info);
         PlayerList.Add(Player2Info);
@@ -106,28 +123,115 @@ public class GameController : MonoBehaviour
         else
         {
             RollButton.SetActive(false);
+            FirstRoll = false;
+            
+            List<Player> PlayerList2 = new List<Player>();
+            PlayerList2 = PlayerList.OrderByDescending(w => w.CurrentRoll).ToList();
 
-            //PlayerList = PlayerList.OrderByDescending(w => w.CurrentRoll).ToList();
+            //Sorts List and Sets Order Number According To Roll.
+            for (int i = 0; i < PlayerList2.Count; i++)
+            {
+                if (PlayerList2[i].PlayerNumber == 1)
+                {
+                    PlayerList[0].Order = i + 1;
+                }
+                if (PlayerList2[i].PlayerNumber == 2)
+                {
+                    PlayerList[1].Order = i + 1;
+                }
+                if (PlayerList2[i].PlayerNumber == 3)
+                {
+                    PlayerList[2].Order = i + 1;
+                }
+                if (PlayerList2[i].PlayerNumber == 4)
+                {
+                    PlayerList[3].Order = i + 1;
+                }
 
-            //for (int i = 0; i < PlayerList.Count; i++)
-            //{
-            //    string ahh = (i + 1).ToString();
-            //    PlayerList[i].RollOrder.GetComponent<Animator>().SetTrigger(ahh);
-            //}
+                //string ahh = (i + 1).ToString();
+                //PlayerList[i].RollOrder.GetComponent<Animator>().SetTrigger(ahh);
+            }
+
+            Debug.Log(Player1Info.Order);
+            Debug.Log(Player2Info.Order);
+            Debug.Log(Player3Info.Order);
+            Debug.Log(Player4Info.Order);
+
+            //RollLoop();
+            RollLoopBool = true;
         }
     }
 
     public void Order()
     {
-        ReOrder(Movess, Player);
+        ReOrder(Movess, Player - 1);
+    }
+
+    public void RollLoopText()
+    {
+        if (RollLoopInt != PlayerAmount)
+        {
+            for (int i = 0; i < PlayerList.Count; i++)
+            {
+                if (PlayerList[i].Order == RollLoopInt + 1)
+                {
+                    TempPlayer = PlayerList[i];
+                }
+            }
+
+            RollNextText.text = "Player " + TempPlayer.PlayerNumber.ToString() + " Roll";
+            MovesLeftText2.text = TempPlayer.Name + " Rolled " + Rolled.ToString();
+            RollNextGameObject.SetActive(true);
+
+            Debug.Log(TempPlayer.PlayerNumber);
+        }
+        else
+        {
+            RollNextGameObject.SetActive(false);
+            //Call MiniGame Etc??
+        }
+    }
+
+    public void RollLoop()
+    {
+        //Roll a Number
+        //Set the Player To Roll
+        Rolled = DiceRoll();
+
+        //Set Camera To Follow Specific Player
+        CamChange.Invoke(TempPlayer.PlayerNumber);
+
+        ReOrder(Rolled, TempPlayer.PlayerNumber - 1);
+
     }
 
 
     public void ReOrder(int Moves, int Player)
     {
         PlayerList[Player].PlayerObject.GetComponent<PlayerMovement>().NumToMove = Moves;
-        this.GetComponent<CameraController>().SetCamera(Player);
+        //this.GetComponent<CameraController>().SetCamera(Player);
     }
 
+    void Update()
+    {
+        if ((Input.GetKeyDown(KeyCode.Space)) && (FirstRoll))
+        {
+            PlayerPicker();
+        }
 
+        if ((Input.GetKeyDown(KeyCode.Space)) && (RollLoopBool))
+        {
+            RollLoop();
+        }
+        if (RollLoopBool)
+        {
+            RollLoopText();
+        }
+
+    }
+
+    public void IncreasePlayerCount()
+    {
+        RollLoopInt++;
+    }
 }
