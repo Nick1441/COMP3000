@@ -25,7 +25,14 @@ public class GameController : MonoBehaviour
     //bool Input;
 
     public GameObject RollButton;
+
+    [Header("Initial Roll Items")]
+    public GameObject InitTextObj;
     public Text TextDie;
+    public Text TextDieSmall;
+    public Text TextDieInit;
+
+    [Header("Player Names Texts")]
     //public GameObject Player1;
     int Rolled = 0;
     public int Die = 0;
@@ -60,6 +67,10 @@ public class GameController : MonoBehaviour
         PlayerAmount = PlayerPrefs.GetInt("PCount");
 
         CreatePlayers();
+
+        TextDie.text = PlayerList[0].Name.ToString() + "'s Roll First";
+        TextDieSmall.text = "Press Space To Roll";
+        TextDieInit.text = "Highest Roll Moves First!";
     }
 
 
@@ -116,12 +127,25 @@ public class GameController : MonoBehaviour
     {
         if (FirstRollInt != PlayerAmount)
         {
+            TextDieInit.GetComponent<Text>().enabled = false;
             PlayerList[FirstRollInt].CurrentRoll = DiceRoll();
-            TextDie.text = PlayerList[FirstRollInt].Name.ToString() + "     " + PlayerList[FirstRollInt].CurrentRoll.ToString();
+            TextDie.text = PlayerList[FirstRollInt].Name.ToString() + " Rolled " + PlayerList[FirstRollInt].CurrentRoll.ToString();
+
+            if (FirstRollInt + 1 == PlayerAmount)
+            {
+                TextDieSmall.text = "Press Space To Start Play!";
+            }
+            else
+            {
+                TextDieSmall.text = PlayerList[FirstRollInt + 1].Name.ToString() + ", Press Space To Roll";
+            }
+            
+
             FirstRollInt++;
         }
         else
         {
+            InitTextObj.SetActive(false);
             RollButton.SetActive(false);
             FirstRoll = false;
             
@@ -152,11 +176,6 @@ public class GameController : MonoBehaviour
                 //PlayerList[i].RollOrder.GetComponent<Animator>().SetTrigger(ahh);
             }
 
-            Debug.Log(Player1Info.Order);
-            Debug.Log(Player2Info.Order);
-            Debug.Log(Player3Info.Order);
-            Debug.Log(Player4Info.Order);
-
             //RollLoop();
             RollLoopBool = true;
         }
@@ -179,7 +198,7 @@ public class GameController : MonoBehaviour
                 }
             }
 
-            RollNextText.text = "Player " + TempPlayer.PlayerNumber.ToString() + " Roll";
+            RollNextText.text = TempPlayer.Name.ToString() + "'s Roll";
             MovesLeftText2.text = TempPlayer.Name + " Rolled " + Rolled.ToString();
             RollNextGameObject.SetActive(true);
 
