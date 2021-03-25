@@ -12,6 +12,8 @@ TagManager:
   - RO2
   - RO3
   - RO4
+  - SceneSwitcher
+  - Controller
   layers:
   - Default
   - TransparentFX

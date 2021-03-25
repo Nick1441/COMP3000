@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     Player Player3Info = new Player();
     Player Player4Info = new Player();
 
-    List<Player> PlayerList = new List<Player>();
+    public List<Player> PlayerList = new List<Player>();
 
     Player TempPlayer = new Player();
     public OnCameraChange CamChange;
@@ -48,29 +48,38 @@ public class GameController : MonoBehaviour
 
     public int Player;
     public int Movess;
+    GameObject SceneSwitcher;
 
     public bool RollLoopBool = false;
     public int RollLoopInt = 0;
     // Start is called before the first frame update
     void Start()
     {
-        Player1Info.PlayerObject = GameObject.FindGameObjectWithTag("Player1");
-        Player2Info.PlayerObject = GameObject.FindGameObjectWithTag("Player2");
-        Player3Info.PlayerObject = GameObject.FindGameObjectWithTag("Player3");
-        Player4Info.PlayerObject = GameObject.FindGameObjectWithTag("Player4");
+        SceneSwitcher = GameObject.FindGameObjectWithTag("SceneSwitcher");
 
-        Player1Info.RollOrder = GameObject.FindGameObjectWithTag("RO1");
-        Player2Info.RollOrder = GameObject.FindGameObjectWithTag("RO2");
-        Player3Info.RollOrder = GameObject.FindGameObjectWithTag("RO3");
-        Player4Info.RollOrder = GameObject.FindGameObjectWithTag("RO4");
+            Player1Info.PlayerObject = GameObject.FindGameObjectWithTag("Player1");
+            Player2Info.PlayerObject = GameObject.FindGameObjectWithTag("Player2");
+            Player3Info.PlayerObject = GameObject.FindGameObjectWithTag("Player3");
+            Player4Info.PlayerObject = GameObject.FindGameObjectWithTag("Player4");
 
-        PlayerAmount = PlayerPrefs.GetInt("PCount");
+            Player1Info.RollOrder = GameObject.FindGameObjectWithTag("RO1");
+            Player2Info.RollOrder = GameObject.FindGameObjectWithTag("RO2");
+            Player3Info.RollOrder = GameObject.FindGameObjectWithTag("RO3");
+            Player4Info.RollOrder = GameObject.FindGameObjectWithTag("RO4");
 
-        CreatePlayers();
+            PlayerAmount = PlayerPrefs.GetInt("PCount");
 
-        TextDie.text = PlayerList[0].Name.ToString() + "'s Roll First";
-        TextDieSmall.text = "Press Space To Roll";
-        TextDieInit.text = "Highest Roll Moves First!";
+            CreatePlayers();
+
+            TextDie.text = PlayerList[0].Name.ToString() + "'s Roll First";
+            TextDieSmall.text = "Press Space To Roll";
+            TextDieInit.text = "Highest Roll Moves First!";
+
+        if (SceneSwitcher.GetComponent<GameTransferData>().LoadingMainGame)
+        {
+            LoadData();
+        }
+
     }
 
 
@@ -119,7 +128,6 @@ public class GameController : MonoBehaviour
 
             Player3Info.RollOrder.SetActive(false);
             Player4Info.RollOrder.SetActive(false);
-
         }
     }
 
@@ -202,7 +210,7 @@ public class GameController : MonoBehaviour
             MovesLeftText2.text = TempPlayer.Name + " Rolled " + Rolled.ToString();
             RollNextGameObject.SetActive(true);
 
-            Debug.Log(TempPlayer.PlayerNumber);
+            //Debug.Log(TempPlayer.PlayerNumber);
         }
         else
         {
@@ -247,10 +255,78 @@ public class GameController : MonoBehaviour
             RollLoopText();
         }
 
+        Debug.Log(PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber.ToString());
+
     }
 
     public void IncreasePlayerCount()
     {
         RollLoopInt++;
+    }
+
+
+
+    void LoadData()
+    {
+        //Setting the List to the current Data.
+        //PlayerList.Clear();
+        //PlayerList = SceneSwitcher.GetComponent<GameTransferData>().PlayerListSwitch;
+
+
+        //Setting the position to the last set data.
+        //PlayerList[0].PlayerObject.transform.position = PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPoint[PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber].transform.position;
+        //PlayerList[1].PlayerObject.transform.position = PlayerList[1].PlayerObject.GetComponent<PlayerMovement>().WayPoint[PlayerList[1].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber].transform.position;
+
+        //if (PlayerAmount == 3)
+        //{
+        //    PlayerList[2].PlayerObject.transform.position = PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPoint[PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber].transform.position;
+        //}
+        //else if (PlayerAmount == 4)
+        //{
+        //    PlayerList[2].PlayerObject.transform.position = PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPoint[PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber].transform.position;
+        //    PlayerList[3].PlayerObject.transform.position = PlayerList[3].PlayerObject.GetComponent<PlayerMovement>().WayPoint[PlayerList[3].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber].transform.position;
+        //}
+        //WILL NEED TO BE DONE WITH WAYPOINTS
+        //WILL NEED TO BE DONE WITH CHESTS
+
+
+
+        //Get the Waypoint Number from Player Prefs.
+        //Set the Position of that one to the Waypoint.
+        int WP1 = PlayerPrefs.GetInt("P1WP");
+        int WP2 = PlayerPrefs.GetInt("P2WP");
+
+        PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = WP1;
+        PlayerList[1].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = WP2;
+
+        PlayerList[0].PlayerObject.transform.position = PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPoint[WP1].transform.position;
+        PlayerList[1].PlayerObject.transform.position = PlayerList[1].PlayerObject.GetComponent<PlayerMovement>().WayPoint[WP2].transform.position;
+
+        if (PlayerAmount == 3)
+        {
+            int WP3 = PlayerPrefs.GetInt("P3WP");
+
+            PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = WP3;
+
+            PlayerList[2].PlayerObject.transform.position = PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPoint[WP3].transform.position;
+        }
+        else if (PlayerAmount == 4)
+        {
+            int WP3 = PlayerPrefs.GetInt("P3WP");
+            int WP4 = PlayerPrefs.GetInt("P4WP");
+
+            PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = WP3;
+            PlayerList[3].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = WP4;
+
+            PlayerList[2].PlayerObject.transform.position = PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPoint[WP3].transform.position;
+            PlayerList[3].PlayerObject.transform.position = PlayerList[3].PlayerObject.GetComponent<PlayerMovement>().WayPoint[WP4].transform.position;
+        }
+
+        
+    }
+
+    public void SaveData()
+    {
+        SceneSwitcher.GetComponent<GameTransferData>().SwitchScene();
     }
 }

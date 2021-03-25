@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (NumToMove == 0 && transform.position == WayPoint[WayPointNumber].transform.position)
         {
-            Debug.Log("Finished!");
+            //Debug.Log("Finished!");
             NumToMove = -1;
             WayPointCheckeer();
             OnComplete.Invoke();

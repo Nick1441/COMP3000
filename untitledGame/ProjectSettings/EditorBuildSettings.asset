@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayerPicker.unity
     guid: 7e9456fdc4a24224290b23f79cf7f0bc
+  - enabled: 1
+    path: Assets/Scenes/MiniGame1.unity
+    guid: 5ada388b09f1537419e1dcfde57417eb
   m_configObjects: {}
