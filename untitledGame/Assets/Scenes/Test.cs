@@ -11,6 +11,10 @@ public class Test : MonoBehaviour
     void Start()
     {
         Switcher = GameObject.FindGameObjectWithTag("SceneSwitcher");
+        if (Switcher.GetComponent<GameTransferData>().LoadingMiniGame1 == true)
+        {
+            Switcher.GetComponent<GameTransferData>().LoadingMiniGame1 = false;
+        }
     }
 
     // Update is called once per frame

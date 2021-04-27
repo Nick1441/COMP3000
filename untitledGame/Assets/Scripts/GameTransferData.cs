@@ -12,16 +12,23 @@ public class GameTransferData : MonoBehaviour
     public bool LoadingMiniGame1 = false;
     public bool LoadingMiniGame2 = false;
 
-    GameObject Controller;
+    public GameObject Controller;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(this);
 
         Controller = GameObject.FindGameObjectWithTag("Controller");
     }
 
+    private void Update()
+    {
+        if (Controller == null)
+        {
+            Controller = GameObject.FindGameObjectWithTag("Controller");
+        }
+    }
     // Update is called once per frame
     public void SwitchScene()
     {

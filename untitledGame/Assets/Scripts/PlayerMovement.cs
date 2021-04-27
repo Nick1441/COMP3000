@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     bool test = true;
 
     public int PlayerNumber = 0;
-
+    public UnityEvent ChangeMovable;
     public OnCompleteMovement OnComplete;
     void Start()
     {
@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
             NumToMove = -1;
             WayPointCheckeer();
             OnComplete.Invoke();
+            ChangeMovable.Invoke();
             //Calls a trigger to incrament a ++ of the number.
 
             //Call method now i guess.

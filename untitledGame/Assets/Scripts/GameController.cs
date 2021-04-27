@@ -7,8 +7,15 @@ using UnityEngine.Events;
 
 [System.Serializable]
 public class OnCameraChange : UnityEvent<int> { }
+[System.Serializable]
+public class OnPlayerRollType : UnityEvent<int> { }
+
+
 public class GameController : MonoBehaviour
 {
+    public UnityEvent PlayerRollEvent;
+    public UnityEvent SwitchOnce;
+
     //Creating Player Info
     Player Player1Info = new Player();
     Player Player2Info = new Player();
@@ -19,6 +26,7 @@ public class GameController : MonoBehaviour
 
     Player TempPlayer = new Player();
     public OnCameraChange CamChange;
+    public OnPlayerRollType rollType;
     //Setting Paramaters
     int PlayerAmount;
     int CurrentTurn = 1;
@@ -48,14 +56,17 @@ public class GameController : MonoBehaviour
 
     public int Player;
     public int Movess;
-    GameObject SceneSwitcher;
+    public GameObject SceneSwitcher;
+    public GameObject[] SceneSwitcherSorter;
 
     public bool RollLoopBool = false;
     public int RollLoopInt = 0;
+
+    public bool Movable = true;
     // Start is called before the first frame update
     void Start()
     {
-        SceneSwitcher = GameObject.FindGameObjectWithTag("SceneSwitcher");
+            //SceneSwitcher = GameObject.FindGameObjectWithTag("SceneSwitcher");
 
             Player1Info.PlayerObject = GameObject.FindGameObjectWithTag("Player1");
             Player2Info.PlayerObject = GameObject.FindGameObjectWithTag("Player2");
@@ -75,9 +86,18 @@ public class GameController : MonoBehaviour
             TextDieSmall.text = "Press Space To Roll";
             TextDieInit.text = "Highest Roll Moves First!";
 
-        if (SceneSwitcher.GetComponent<GameTransferData>().LoadingMainGame)
+
+        SceneSwitcherSorter = GameObject.FindGameObjectsWithTag("SceneSwitcher");
+
+        if (SceneSwitcherSorter[1] != null)
+        {
+            Destroy(SceneSwitcherSorter[1]);
+        }
+
+        if (SceneSwitcherSorter[0].GetComponent<GameTransferData>().LoadingMainGame)
         {
             LoadData();
+            SceneSwitcherSorter[0].GetComponent<GameTransferData>().LoadingMainGame = false;
         }
 
     }
@@ -131,25 +151,39 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void PlayerPickerSecond(int rolled)
+    {
+        PlayerList[FirstRollInt].CurrentRoll = rolled;
+
+        TextDie.text = PlayerList[FirstRollInt].Name.ToString() + " Rolled " + PlayerList[FirstRollInt].CurrentRoll.ToString();
+
+        if (FirstRollInt + 1 == PlayerAmount)
+        {
+            TextDieSmall.text = "Press Space To Start Play!";
+        }
+        else
+        {
+            TextDieSmall.text = PlayerList[FirstRollInt + 1].Name.ToString() + ", Press Space To Roll";
+        }
+
+
+        FirstRollInt++;
+    }
+
     public void PlayerPicker()
     {
         if (FirstRollInt != PlayerAmount)
         {
             TextDieInit.GetComponent<Text>().enabled = false;
-            PlayerList[FirstRollInt].CurrentRoll = DiceRoll();
-            TextDie.text = PlayerList[FirstRollInt].Name.ToString() + " Rolled " + PlayerList[FirstRollInt].CurrentRoll.ToString();
 
-            if (FirstRollInt + 1 == PlayerAmount)
-            {
-                TextDieSmall.text = "Press Space To Start Play!";
-            }
-            else
-            {
-                TextDieSmall.text = PlayerList[FirstRollInt + 1].Name.ToString() + ", Press Space To Roll";
-            }
-            
 
-            FirstRollInt++;
+            //This will trigger other game Object.
+            //PlayerList[FirstRollInt].CurrentRoll = DiceRoll();
+
+            PlayerRollEvent.Invoke();
+            rollType.Invoke(1);
+
+
         }
         else
         {
@@ -186,6 +220,8 @@ public class GameController : MonoBehaviour
 
             //RollLoop();
             RollLoopBool = true;
+            Movable = true;
+            Debug.Log("SETTING");
         }
     }
 
@@ -223,13 +259,26 @@ public class GameController : MonoBehaviour
     {
         //Roll a Number
         //Set the Player To Roll
-        Rolled = DiceRoll();
+        //Rolled = DiceRoll();
 
+
+        PlayerRollEvent.Invoke();
+        rollType.Invoke(2);
+
+        //CamChange.Invoke(TempPlayer.PlayerNumber);
+
+        //ReOrder(Rolled, TempPlayer.PlayerNumber - 1);
         //Set Camera To Follow Specific Player
+    }
+
+    public void RollLoopRest(int NewRoll)
+    {
+        Debug.Log("NEW ROLE - " + NewRoll);
+        Rolled = NewRoll;
         CamChange.Invoke(TempPlayer.PlayerNumber);
 
         ReOrder(Rolled, TempPlayer.PlayerNumber - 1);
-
+        //Debug.Log("RETURNED" + Rolled);
     }
 
 
@@ -241,14 +290,18 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Space)) && (FirstRoll))
+        if ((Input.GetKeyDown(KeyCode.Space)) && (FirstRoll) && (Movable))
         {
+            Movable = false;
             PlayerPicker();
+            
+            Debug.Log("TRIGGERED");
         }
 
-        if ((Input.GetKeyDown(KeyCode.Space)) && (RollLoopBool))
+        if ((Input.GetKeyDown(KeyCode.Space)) && (RollLoopBool) && (Movable))
         {
             RollLoop();
+            Movable = false;
         }
         if (RollLoopBool)
         {
@@ -262,6 +315,11 @@ public class GameController : MonoBehaviour
     public void IncreasePlayerCount()
     {
         RollLoopInt++;
+    }
+
+    public void MoveBool()
+    {
+        Movable = true;
     }
 
 
@@ -327,6 +385,6 @@ public class GameController : MonoBehaviour
 
     public void SaveData()
     {
-        SceneSwitcher.GetComponent<GameTransferData>().SwitchScene();
+        SceneSwitcherSorter[0].GetComponent<GameTransferData>().SwitchScene();
     }
 }
