@@ -122,11 +122,11 @@ public class GameController : MonoBehaviour
             Destroy(SceneSwitcherSorter[1]);
         }
 
-        if (SceneSwitcherSorter[0].GetComponent<GameTransferData>().LoadingMainGame)
-        {
-            //LoadData();
-            SceneSwitcherSorter[0].GetComponent<GameTransferData>().LoadingMainGame = false;
-        }
+        //if (SceneSwitcherSorter[0].GetComponent<GameTransferData>().LoadingMainGame)
+        //{
+        //    //LoadData();
+        //    SceneSwitcherSorter[0].GetComponent<GameTransferData>().LoadingMainGame = false;
+        //}
 
     }
 
@@ -288,7 +288,7 @@ public class GameController : MonoBehaviour
         //Set the Player To Roll
         //Rolled = DiceRoll();
 
-
+        //CamChange.Invoke(TempPlayer.PlayerNumber);
         PlayerRollEvent.Invoke();
         rollType.Invoke(2);
 
@@ -304,6 +304,11 @@ public class GameController : MonoBehaviour
         Rolled = NewRoll;
         CamChange.Invoke(TempPlayer.PlayerNumber);
 
+        
+    }
+
+    public void RollRest2()
+    {
         ReOrder(Rolled, TempPlayer.PlayerNumber - 1);
     }
 
