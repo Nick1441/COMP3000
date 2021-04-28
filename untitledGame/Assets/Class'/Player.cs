@@ -10,4 +10,6 @@ public class Player
     public int PlayerNumber;
     public GameObject PlayerObject;
     public GameObject RollOrder;
+
+    public int Coins;
 }
