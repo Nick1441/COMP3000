@@ -284,27 +284,14 @@ public class GameController : MonoBehaviour
 
     public void RollLoop()
     {
-        //Roll a Number
-        //Set the Player To Roll
-        //Rolled = DiceRoll();
-
-        //CamChange.Invoke(TempPlayer.PlayerNumber);
         PlayerRollEvent.Invoke();
         rollType.Invoke(2);
-
-        //CamChange.Invoke(TempPlayer.PlayerNumber);
-
-        //ReOrder(Rolled, TempPlayer.PlayerNumber - 1);
-        //Set Camera To Follow Specific Player
     }
 
     public void RollLoopRest(int NewRoll)
     {
-        //Debug.Log("NEW ROLE - " + NewRoll);
         Rolled = NewRoll;
         CamChange.Invoke(TempPlayer.PlayerNumber);
-
-        
     }
 
     public void RollRest2()

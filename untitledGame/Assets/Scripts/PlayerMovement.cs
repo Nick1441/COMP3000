@@ -41,6 +41,16 @@ public class PlayerMovement : MonoBehaviour
     public Material mat4;
     Material NewMat;
 
+    [Header("Splitter Spaces")]
+    public int Splitter1;
+    public int Spiltter2;
+    public int Splitter3;
+    [Space]
+    public GameObject SplitterText;
+    bool Splitting = false;
+    public int SplitterNumber = 0;
+    public int TempMove = 0;
+
     GameObject SendToPlayer;
     void Start()
     {
@@ -50,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
         BuyPoint = GameObject.FindGameObjectWithTag("BuyWayPoint");
         BuyText = GameObject.FindGameObjectWithTag("BuyText").GetComponent<Text>();
         //BuyPoint.SetActive(false);
+
+        SplitterText.SetActive(false);
     }
 
 
@@ -74,6 +86,20 @@ public class PlayerMovement : MonoBehaviour
         {
             Buying = false;
             BuyCurrent(1);
+        }
+
+        if (Splitting && Input.GetKeyDown(KeyCode.A))
+        {
+            SpillterExit(0);
+            Splitting = false;
+            SplitterText.SetActive(false);
+        }
+
+        if (Splitting && Input.GetKeyDown(KeyCode.D))
+        {
+            SpillterExit(1);
+            Splitting = false;
+            SplitterText.SetActive(false);
         }
     }
 
@@ -103,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
         {
             NumToMove--;
             WayPointNumber++;
+            CheckPoint();
             MovesLeftText.text = "Moves Left" + NumToMove.ToString();
         }
         else if (NumToMove == 0 && transform.position == WayPoint[WayPointNumber].transform.position)
@@ -206,6 +233,60 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             EndTurn();
+        }
+    }
+
+    void CheckPoint()
+    {
+        if (WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter == true)
+        {
+            TempMove = NumToMove;
+            NumToMove = -1;
+            SplitterText.SetActive(true);
+            Splitting = true;
+        }
+    }
+
+    void SpillterExit(int Answer)
+    {
+        //First Splitter, DUplicate for More Splitters!
+        if (WayPoint[WayPointNumber].GetComponent<WayPointChecker>().WayPointSplit == 1)
+        {
+            // 0 - Left, 1 - Right First Splitter, 0 = Off Main route
+            if (Answer == 0)
+            {
+                if (TempMove == 0)
+                {
+                    WayPointNumber = Splitter1 - 1;
+                    NumToMove = TempMove;
+                }
+                else if (TempMove == 1)
+                {
+                    WayPointNumber = Splitter1;
+                    NumToMove = TempMove - 1;
+                }
+                else
+                {
+                    WayPointNumber = Splitter1 - 1;
+                    NumToMove = TempMove;
+                }
+            }
+            else
+            {
+                if (TempMove == 0)
+                {
+                    NumToMove = TempMove;
+                }
+                else if (TempMove == 1)
+                {
+                    WayPointNumber++;
+                    NumToMove = TempMove - 1;
+                }
+                else
+                {
+                    NumToMove = TempMove;
+                }
+            }
         }
     }
 }

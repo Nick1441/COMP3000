@@ -10,6 +10,13 @@ public class WayPointChecker : MonoBehaviour
     public int PayAmount = 0;
     public bool Ownable = false;
 
+    public bool Splitter = false;
+    public int WayPointSplit = 0;
+
+    public bool EndSplit = false;
+    public int BackTrackNum = 0;
+
+
     void Update()
     {
         
