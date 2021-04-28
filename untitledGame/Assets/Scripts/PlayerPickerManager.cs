@@ -25,6 +25,11 @@ public class PlayerPickerManager : MonoBehaviour
     public GameObject Player3Name;
     public GameObject Player4Name;
 
+    string SaveP1Name = "";
+    string SaveP2Name = "";
+    string SaveP3Name = "";
+    string SaveP4Name = "";
+
     // Start is called before the first frame update
     void Start()
     {

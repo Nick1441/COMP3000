@@ -34,6 +34,13 @@ public class PlayerMovement : MonoBehaviour
 
     bool FirstTImeSetup = true;
 
+    [Header("Materials")]
+    public Material mat1;
+    public Material mat2;
+    public Material mat3;
+    public Material mat4;
+    Material NewMat;
+
     GameObject SendToPlayer;
     void Start()
     {
@@ -171,11 +178,29 @@ public class PlayerMovement : MonoBehaviour
         BuyPoint.SetActive(false);
         if (Answer == 1)
         {
+            SendToPlayer.GetComponent<GameController>().PlayerList[PlayerNumber - 1].Coins -= WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Cost;
             WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Ownable = false;
             WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Owned = true;
             string OwenedByString = PlayerNumber.ToString();
             WayPoint[WayPointNumber].GetComponent<WayPointChecker>().OwnedBy = OwenedByString;
 
+            if (PlayerNumber == 1)
+            {
+                NewMat = mat1;
+            }
+            else if (PlayerNumber == 2)
+            {
+                NewMat = mat2;
+            }
+            else if (PlayerNumber == 3)
+            {
+                NewMat = mat3;
+            }
+            else if (PlayerNumber == 4)
+            {
+                NewMat = mat4;
+            }
+            WayPoint[WayPointNumber].GetChild(0).GetChild(0).GetComponent<MeshRenderer>().material = NewMat;
             EndTurn();
         }
         else

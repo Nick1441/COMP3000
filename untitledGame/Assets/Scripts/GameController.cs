@@ -63,6 +63,21 @@ public class GameController : MonoBehaviour
     public int RollLoopInt = 0;
 
     public bool Movable = true;
+
+
+    [Header("Player Stats")]
+    public int Player1Coins = 0;
+    public int Player2Coins = 0;
+    public int Player3Coins = 0;
+    public int Player4Coins = 0;
+
+    [Header("Player Demo Text")]
+    public GameObject Text1;
+    public GameObject Text2;
+    public GameObject Text3;
+    public GameObject Text4;
+    public GameObject Text5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -176,14 +191,8 @@ public class GameController : MonoBehaviour
         {
             TextDieInit.GetComponent<Text>().enabled = false;
 
-
-            //This will trigger other game Object.
-            //PlayerList[FirstRollInt].CurrentRoll = DiceRoll();
-
             PlayerRollEvent.Invoke();
             rollType.Invoke(1);
-
-
         }
         else
         {
@@ -213,15 +222,12 @@ public class GameController : MonoBehaviour
                 {
                     PlayerList[3].Order = i + 1;
                 }
-
-                //string ahh = (i + 1).ToString();
-                //PlayerList[i].RollOrder.GetComponent<Animator>().SetTrigger(ahh);
             }
 
             //RollLoop();
             RollLoopBool = true;
             Movable = true;
-            Debug.Log("SETTING");
+            
         }
     }
 
@@ -251,6 +257,9 @@ public class GameController : MonoBehaviour
         else
         {
             RollNextGameObject.SetActive(false);
+            Debug.Log("Hit Last?");
+            Text5.SetActive(true);
+            //SET SO CAN ONLY CALL ONCE< THIS IS WHERE THE OPTION TO LOAD NEXT SCEBNE IS! CHANGE IT UP ALSO SO THAT PLAYERS CANT ROLL
             //Call MiniGame Etc??
         }
     }
@@ -278,14 +287,12 @@ public class GameController : MonoBehaviour
         CamChange.Invoke(TempPlayer.PlayerNumber);
 
         ReOrder(Rolled, TempPlayer.PlayerNumber - 1);
-        //Debug.Log("RETURNED" + Rolled);
     }
 
 
     public void ReOrder(int Moves, int Player)
     {
         PlayerList[Player].PlayerObject.GetComponent<PlayerMovement>().NumToMove = Moves;
-        //this.GetComponent<CameraController>().SetCamera(Player);
     }
 
     void Update()
@@ -309,6 +316,24 @@ public class GameController : MonoBehaviour
         }
 
         Debug.Log(PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber.ToString());
+
+
+        //Player1Coins = PlayerList[0].Coins;
+        //Player2Coins = PlayerList[1].Coins;
+        //Player3Coins = PlayerList[2].Coins;
+        //Player4Coins = PlayerList[3].Coins;
+
+        Text1.GetComponent<Text>().text = "Player 1 Coins = " + PlayerList[0].Coins.ToString();
+        Text2.GetComponent<Text>().text = "Player 2 Coins = " + PlayerList[1].Coins.ToString();
+        if (PlayerAmount == 3)
+        {
+            Text3.GetComponent<Text>().text = "Player 3 Coins = " + PlayerList[2].Coins.ToString();
+        }
+        else if (PlayerAmount == 4)
+        {
+            Text3.GetComponent<Text>().text = "Player 3 Coins = " + PlayerList[2].Coins.ToString();
+            Text4.GetComponent<Text>().text = "Player 4 Coins = " + PlayerList[3].Coins.ToString();
+        }
 
     }
 
