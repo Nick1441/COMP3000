@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class PlayerPickerManager : MonoBehaviour
 {
@@ -25,10 +26,14 @@ public class PlayerPickerManager : MonoBehaviour
     public GameObject Player3Name;
     public GameObject Player4Name;
 
-    string SaveP1Name = "";
-    string SaveP2Name = "";
-    string SaveP3Name = "";
-    string SaveP4Name = "";
+    string SaveP1Name = "NULL";
+    string SaveP2Name = "NULL";
+    string SaveP3Name = "NULL";
+    string SaveP4Name = "NULL";
+    int SavePCount = 0;
+    SavingLoading SaveLoad = new SavingLoading();
+    string JsonPath;
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +45,8 @@ public class PlayerPickerManager : MonoBehaviour
         //Showing The Add Player Images.
         Player3.SetActive(false);
         Player4.SetActive(false);
+
+        JsonPath = Application.persistentDataPath + "/saveload.json";
     }
 
     //Tersting Purposes
@@ -50,56 +57,76 @@ public class PlayerPickerManager : MonoBehaviour
         if (Player1Name.GetComponent<Text>().text == "")
         {
             name = "Player1";
-            PlayerPrefs.SetString("P1Name", name);
+            SaveP1Name = name;
+            //PlayerPrefs.SetString("P1Name", name);
         }
         else
         {
             name = Player1Name.GetComponent<Text>().text;
-            PlayerPrefs.SetString("P1Name", name);
+            //PlayerPrefs.SetString("P1Name", name);
+            SaveP1Name = name;
         }
 
         if (Player2Name.GetComponent<Text>().text == "")
         {
             name = "Player2";
-            PlayerPrefs.SetString("P2Name", name);
+            //PlayerPrefs.SetString("P2Name", name);
+            SaveP2Name = name;
         }
         else
         {
             name = Player2Name.GetComponent<Text>().text;
-            PlayerPrefs.SetString("P2Name", name);
+            //PlayerPrefs.SetString("P2Name", name);
+            SaveP2Name = name;
         }
 
-        PlayerPrefs.SetInt("PCount", 2);
+        //PlayerPrefs.SetInt("PCount", 2);
+        SavePCount = 2;
 
         if (Player3Bool)
         {
             if (Player3Name.GetComponent<Text>().text == "")
             {
                 name = "Player3";
-                PlayerPrefs.SetString("P3Name", name);
+                //PlayerPrefs.SetString("P3Name", name);
+                SaveP3Name = name;
             }
             else
             {
                 name = Player3Name.GetComponent<Text>().text;
-                PlayerPrefs.SetString("P3Name", name);
+                //PlayerPrefs.SetString("P3Name", name);
+                SaveP3Name = name;
             }
-            PlayerPrefs.SetInt("PCount", 3);
+            //PlayerPrefs.SetInt("PCount", 3);
+            SavePCount = 3;
         }
         if (Player4Bool)
         {
             if (Player4Name.GetComponent<Text>().text == "")
             {
                 name = "Player4";
-                PlayerPrefs.SetString("P4Name", name);
+                //PlayerPrefs.SetString("P4Name", name);
+                SaveP4Name = name;
             }
             else
             {
                 name = Player4Name.GetComponent<Text>().text;
-                PlayerPrefs.SetString("P4Name", name);
+                //PlayerPrefs.SetString("P4Name", name);
+                SaveP4Name = name;
             }
 
-            PlayerPrefs.SetInt("PCount", 4);
+            //PlayerPrefs.SetInt("PCount", 4);
+            SavePCount = 4;
         }
+
+        SaveLoad.P1Name = SaveP1Name;
+        SaveLoad.P2Name = SaveP2Name;
+        SaveLoad.P3Name = SaveP3Name;
+        SaveLoad.P4Name = SaveP4Name;
+        SaveLoad.PCount = SavePCount;
+
+        string JSONDATA = JsonUtility.ToJson(SaveLoad, true);
+        File.WriteAllText(JsonPath, JSONDATA);
 
         SceneManager.LoadScene("MainGame");
     }

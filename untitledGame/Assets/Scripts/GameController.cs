@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.Events;
+using System.IO;
 
 [System.Serializable]
 public class OnCameraChange : UnityEvent<int> { }
@@ -28,8 +29,8 @@ public class GameController : MonoBehaviour
     public OnCameraChange CamChange;
     public OnPlayerRollType rollType;
     //Setting Paramaters
-    int PlayerAmount;
-    int CurrentTurn = 1;
+    public int PlayerAmount = 0;
+    //int CurrentTurn = 1;
     //bool Input;
 
     public GameObject RollButton;
@@ -45,7 +46,7 @@ public class GameController : MonoBehaviour
     int Rolled = 0;
     public int Die = 0;
     int FirstRollInt = 0;
-    bool FirstRollCompleted = false;
+    //bool FirstRollCompleted = false;
     public Text MovesLeftText;
     public Text MovesLeftText2;
     bool FirstRoll = true;
@@ -77,41 +78,53 @@ public class GameController : MonoBehaviour
     public GameObject Text3;
     public GameObject Text4;
     public GameObject Text5;
+    public GameObject Text6;
+    public GameObject Text7;
+    public GameObject Text8;
+    public GameObject Text9;
+    public GameObject Text10;
+
+    SavingLoading InData;
 
     // Start is called before the first frame update
     void Start()
     {
-            //SceneSwitcher = GameObject.FindGameObjectWithTag("SceneSwitcher");
+        //SceneSwitcher = GameObject.FindGameObjectWithTag("SceneSwitcher");
 
-            Player1Info.PlayerObject = GameObject.FindGameObjectWithTag("Player1");
-            Player2Info.PlayerObject = GameObject.FindGameObjectWithTag("Player2");
-            Player3Info.PlayerObject = GameObject.FindGameObjectWithTag("Player3");
-            Player4Info.PlayerObject = GameObject.FindGameObjectWithTag("Player4");
+        LoadDataJSON();
+            
+        Player1Info.PlayerObject = GameObject.FindGameObjectWithTag("Player1");
+        Player2Info.PlayerObject = GameObject.FindGameObjectWithTag("Player2");
+        Player3Info.PlayerObject = GameObject.FindGameObjectWithTag("Player3");
+        Player4Info.PlayerObject = GameObject.FindGameObjectWithTag("Player4");
 
-            Player1Info.RollOrder = GameObject.FindGameObjectWithTag("RO1");
-            Player2Info.RollOrder = GameObject.FindGameObjectWithTag("RO2");
-            Player3Info.RollOrder = GameObject.FindGameObjectWithTag("RO3");
-            Player4Info.RollOrder = GameObject.FindGameObjectWithTag("RO4");
+        Player1Info.RollOrder = GameObject.FindGameObjectWithTag("RO1");
+        Player2Info.RollOrder = GameObject.FindGameObjectWithTag("RO2");
+        Player3Info.RollOrder = GameObject.FindGameObjectWithTag("RO3");
+        Player4Info.RollOrder = GameObject.FindGameObjectWithTag("RO4");
 
-            PlayerAmount = PlayerPrefs.GetInt("PCount");
+        //PlayerAmount = PlayerPrefs.GetInt("PCount");
+        PlayerAmount = InData.PCount;
 
-            CreatePlayers();
+        CreatePlayers();
 
-            TextDie.text = PlayerList[0].Name.ToString() + "'s Roll First";
-            TextDieSmall.text = "Press Space To Roll";
-            TextDieInit.text = "Highest Roll Moves First!";
+        TextDie.text = PlayerList[0].Name.ToString() + "'s Roll First";
+        TextDieSmall.text = "Press Space To Roll";
+        TextDieInit.text = "Highest Roll Moves First!";
+
 
 
         SceneSwitcherSorter = GameObject.FindGameObjectsWithTag("SceneSwitcher");
 
-        if (SceneSwitcherSorter[1] != null)
+        if (SceneSwitcherSorter.Length == 2)
+        //if (SceneSwitcherSorter[1] != null)
         {
             Destroy(SceneSwitcherSorter[1]);
         }
 
         if (SceneSwitcherSorter[0].GetComponent<GameTransferData>().LoadingMainGame)
         {
-            LoadData();
+            //LoadData();
             SceneSwitcherSorter[0].GetComponent<GameTransferData>().LoadingMainGame = false;
         }
 
@@ -126,30 +139,30 @@ public class GameController : MonoBehaviour
 
 
     public void CreatePlayers()
-    {
-        Player1Info.Name = PlayerPrefs.GetString("P1Name");
-        Player2Info.Name = PlayerPrefs.GetString("P2Name");
-        Player3Info.Name = PlayerPrefs.GetString("P3Name");
-        Player4Info.Name = PlayerPrefs.GetString("P4Name");
+    {   
+        Player1Info.Name = InData.P1Name;
+        Player2Info.Name = InData.P2Name;
+        Player3Info.Name = InData.P3Name;
+        Player4Info.Name = InData.P4Name;
 
         Player1Info.PlayerNumber = 1;
         Player2Info.PlayerNumber = 2;
         Player3Info.PlayerNumber = 3;
         Player4Info.PlayerNumber = 4;
 
-        PlayerList.Add(Player1Info);
-        PlayerList.Add(Player2Info);
+
 
         Player1Info.RollOrder.transform.GetChild(0).GetComponent<Text>().text = Player1Info.Name;
         Player2Info.RollOrder.transform.GetChild(0).GetComponent<Text>().text = Player2Info.Name;
         Player3Info.RollOrder.transform.GetChild(0).GetComponent<Text>().text = Player3Info.Name;
         Player4Info.RollOrder.transform.GetChild(0).GetComponent<Text>().text = Player4Info.Name;
 
-        if (PlayerAmount == 4)
-        {
-            PlayerList.Add(Player3Info);
-            PlayerList.Add(Player4Info);
-        }
+        PlayerList.Add(Player1Info);
+        PlayerList.Add(Player2Info);
+
+        Text6.GetComponent<Text>().text = InData.PCount.ToString();
+
+
         if (PlayerAmount == 3)
         {
             PlayerList.Add(Player3Info);
@@ -163,6 +176,11 @@ public class GameController : MonoBehaviour
 
             Player3Info.RollOrder.SetActive(false);
             Player4Info.RollOrder.SetActive(false);
+        }
+        if (PlayerAmount == 4)
+        {
+            PlayerList.Add(Player3Info);
+            PlayerList.Add(Player4Info);
         }
     }
 
@@ -257,7 +275,7 @@ public class GameController : MonoBehaviour
         else
         {
             RollNextGameObject.SetActive(false);
-            Debug.Log("Hit Last?");
+            //Debug.Log("Hit Last?");
             Text5.SetActive(true);
             //SET SO CAN ONLY CALL ONCE< THIS IS WHERE THE OPTION TO LOAD NEXT SCEBNE IS! CHANGE IT UP ALSO SO THAT PLAYERS CANT ROLL
             //Call MiniGame Etc??
@@ -282,7 +300,7 @@ public class GameController : MonoBehaviour
 
     public void RollLoopRest(int NewRoll)
     {
-        Debug.Log("NEW ROLE - " + NewRoll);
+        //Debug.Log("NEW ROLE - " + NewRoll);
         Rolled = NewRoll;
         CamChange.Invoke(TempPlayer.PlayerNumber);
 
@@ -297,12 +315,25 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log(PlayerAmount + "<- Player Amount");
+        
+        Text7.GetComponent<Text>().text = PlayerList[0].Name;
+        Text8.GetComponent<Text>().text = PlayerList[1].Name;
+        if (PlayerAmount == 3)
+        {
+            Text9.GetComponent<Text>().text = PlayerList[2].Name;
+        }
+        else if (PlayerAmount == 4)
+         {
+
+            Text9.GetComponent<Text>().text = PlayerList[2].Name;
+            Text10.GetComponent<Text>().text = PlayerList[3].Name;
+        }
+
         if ((Input.GetKeyDown(KeyCode.Space)) && (FirstRoll) && (Movable))
         {
             Movable = false;
             PlayerPicker();
-            
-            Debug.Log("TRIGGERED");
         }
 
         if ((Input.GetKeyDown(KeyCode.Space)) && (RollLoopBool) && (Movable))
@@ -315,22 +346,25 @@ public class GameController : MonoBehaviour
             RollLoopText();
         }
 
-        Debug.Log(PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber.ToString());
+        //Debug.Log(PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber.ToString());
 
 
-        //Player1Coins = PlayerList[0].Coins;
-        //Player2Coins = PlayerList[1].Coins;
-        //Player3Coins = PlayerList[2].Coins;
-        //Player4Coins = PlayerList[3].Coins;
+        Player1Coins = PlayerList[0].Coins;
+        Player2Coins = PlayerList[1].Coins;
+
 
         Text1.GetComponent<Text>().text = "Player 1 Coins = " + PlayerList[0].Coins.ToString();
         Text2.GetComponent<Text>().text = "Player 2 Coins = " + PlayerList[1].Coins.ToString();
         if (PlayerAmount == 3)
         {
+            Player3Coins = PlayerList[2].Coins;
             Text3.GetComponent<Text>().text = "Player 3 Coins = " + PlayerList[2].Coins.ToString();
         }
         else if (PlayerAmount == 4)
         {
+            Player3Coins = PlayerList[2].Coins;
+            Player4Coins = PlayerList[3].Coins;
+
             Text3.GetComponent<Text>().text = "Player 3 Coins = " + PlayerList[2].Coins.ToString();
             Text4.GetComponent<Text>().text = "Player 4 Coins = " + PlayerList[3].Coins.ToString();
         }
@@ -405,11 +439,18 @@ public class GameController : MonoBehaviour
             PlayerList[3].PlayerObject.transform.position = PlayerList[3].PlayerObject.GetComponent<PlayerMovement>().WayPoint[WP4].transform.position;
         }
 
-        
+
     }
 
     public void SaveData()
     {
         SceneSwitcherSorter[0].GetComponent<GameTransferData>().SwitchScene();
+    }
+
+
+    public void LoadDataJSON()
+    {
+        Debug.Log(Application.persistentDataPath);
+        InData = JsonUtility.FromJson<SavingLoading>(File.ReadAllText(Application.persistentDataPath + "/saveload.json"));
     }
 }

@@ -9,7 +9,7 @@ public class BombManMovement : MonoBehaviour
     public bool canDropBombs = true;
     public bool canMove = true;
 
-    private int bombs = 2;
+   //private int bombs = 2;
     public GameObject bombPrefab;
 
     private Rigidbody rigidBody;
@@ -113,7 +113,7 @@ public class BombManMovement : MonoBehaviour
     {
         if (other.CompareTag("Explosion"))
         {
-            Debug.Log("P" + playerNumber + " hit by explosion!");
+            //Debug.Log("P" + playerNumber + " hit by explosion!");
         }
     }
 }

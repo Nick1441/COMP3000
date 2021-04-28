@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraToPlayer : MonoBehaviour
 {
     //Tags For each Player
-    public GameObject Cam = new GameObject();
+    public GameObject Cam;
     GameObject P1;
     GameObject P2;
     GameObject P3;

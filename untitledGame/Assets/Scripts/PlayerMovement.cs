@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public int NumToMove = -1;
     public bool Moving = false;
     public bool Moved = false;
-    bool test = true;
+    //bool test = true;
 
     public int PlayerNumber = 0;
     public UnityEvent ChangeMovable;
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         //transform.position = WayPoint[WayPointNumber].transform.position;
-        Debug.Log("WORKING");
+        //Debug.Log("WORKING");
         SendToPlayer = GameObject.FindGameObjectWithTag("Controller");
         BuyPoint = GameObject.FindGameObjectWithTag("BuyWayPoint");
         BuyText = GameObject.FindGameObjectWithTag("BuyText").GetComponent<Text>();
@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (NumToMove == 0 && transform.position == WayPoint[WayPointNumber].transform.position)
         {
-            Debug.Log("Finished!");
+            //Debug.Log("Finished!");
             NumToMove = -1;
             WayPointCheckeer();
 
@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
                 int NewInt = int.Parse(WayPoint[WayPointNumber].GetComponent<WayPointChecker>().OwnedBy);
 
                 SendToPlayer.GetComponent<GameController>().PlayerList[PlayerNumber - 1].Coins -= Transfer; //Take From Current Player
-                SendToPlayer.GetComponent<GameController>().PlayerList[NewInt].Coins += Transfer; //Give to Owned Player
+                SendToPlayer.GetComponent<GameController>().PlayerList[NewInt -1].Coins += Transfer; //Give to Owned Player
 
                 //Display Coins Moving? Some Sort of text or animation!
                 EndTurn();
