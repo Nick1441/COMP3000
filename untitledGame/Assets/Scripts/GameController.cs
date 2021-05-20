@@ -274,6 +274,14 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            //After Each Turn
+            //This will load into the next scene.
+            //Enable a way to pick a MiniGame e.g. Enable a selector Menu
+
+            //This should disable any other movements?
+            RollLoopBool = false;
+            Movable = false;
+
             RollNextGameObject.SetActive(false);
             //Debug.Log("Hit Last?");
             Text5.SetActive(true);
@@ -444,5 +452,10 @@ public class GameController : MonoBehaviour
     {
         Debug.Log(Application.persistentDataPath);
         InData = JsonUtility.FromJson<SavingLoading>(File.ReadAllText(Application.persistentDataPath + "/saveload.json"));
+    }
+
+    public void PickMiniGame()
+    {
+
     }
 }
