@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public Text BuyText;
 
     public int NumToMove = -1;
+    public int TempMove = 0;
     public bool Moving = false;
     public bool Moved = false;
     //bool test = true;
@@ -49,7 +50,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject SplitterText;
     bool Splitting = false;
     public int SplitterNumber = 0;
-    public int TempMove = 0;
+    GameObject SplitterControler;
+    
 
     GameObject SendToPlayer;
     void Start()
@@ -62,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
         //BuyPoint.SetActive(false);
 
         SplitterText.SetActive(false);
+        SplitterControler = GameObject.FindGameObjectWithTag("SPLITTERCONTROL");
     }
 
 
@@ -90,15 +93,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (Splitting && Input.GetKeyDown(KeyCode.A))
         {
-            SpillterExit(0);
             Splitting = false;
+            SpillterExit(0);
             SplitterText.SetActive(false);
         }
 
         if (Splitting && Input.GetKeyDown(KeyCode.D))
         {
-            SpillterExit(1);
             Splitting = false;
+            SpillterExit(1);
             SplitterText.SetActive(false);
         }
     }
@@ -149,27 +152,31 @@ public class PlayerMovement : MonoBehaviour
     //Method to check if waypoint is Special or Defualt
     void WayPointCheckerStopped()
     {
-        //Creating General Bools to shorten other if Statments.
-        bool Owned = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Owned;
-        bool Ownable = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Ownable;
-        bool isSplitter = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter;
-
-        //Space is Owned by A Player
-        if (Owned == true)
+        //Will not Trigger on Starting Point.
+        if (WayPoint[WayPointNumber].GetComponent<WayPointChecker>() != null)
         {
-            TrapOwnded();
-        }
+            //Creating General Bools to shorten other if Statments.
+            bool Owned = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Owned;
+            bool Ownable = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Ownable;
+            bool isSplitter = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter;
 
-        //Space is Free to Be Owned.
-        if ((Owned == false) && (Ownable == true))
-        {
-            TrapFree();
-        }
+            //Space is Owned by A Player
+            if (Owned == true)
+            {
+                TrapOwnded();
+            }
 
-        //Space is Nothing.
-        if ((Ownable == false) && (isSplitter == false))
-        {
-            EndTurn();
+            //Space is Free to Be Owned.
+            if ((Owned == false) && (Ownable == true))
+            {
+                TrapFree();
+            }
+
+            //Space is Nothing.
+            if ((Ownable == false) && (isSplitter == false))
+            {
+                EndTurn();
+            }
         }
     }
 
@@ -183,61 +190,15 @@ public class PlayerMovement : MonoBehaviour
 
     void WayPointCheckerMoving()
     {
-        if (WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter == true)
+        bool isSplitter = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter == true;
+
+        if (isSplitter == true)
         {
-            TempMove = NumToMove;
-            NumToMove = -1;
-            SplitterText.SetActive(true);
-            Splitting = true;
+            Splitter();
         }
     }
 
-    void SpillterExit(int Answer)
-    {
-        //First Splitter, DUplicate for More Splitters!
-        if (WayPoint[WayPointNumber].GetComponent<WayPointChecker>().WayPointSplit == 1)
-        {
-            // 0 - Left, 1 - Right First Splitter, 0 = Off Main route
-            if (Answer == 0)
-            {
-                if (TempMove == 0)
-                {
-                    WayPointNumber = Splitter1 - 1;
-                    NumToMove = TempMove;
-                }
-                else if (TempMove == 1)
-                {
-                    WayPointNumber = Splitter1;
-                    NumToMove = TempMove - 1;
-                }
-                else
-                {
-                    WayPointNumber = Splitter1 - 1;
-                    NumToMove = TempMove;
-                }
-            }
-            else
-            {
-                if (TempMove == 0)
-                {
-                    NumToMove = TempMove;
-                }
-                else if (TempMove == 1)
-                {
-                    WayPointNumber++;
-                    NumToMove = TempMove - 1;
-                }
-                else
-                {
-                    NumToMove = TempMove;
-                }
-            }
-        }
-        //
-        //MAKE THIS WAIT UNTIL THIS CHOOSING HAS BEEN COMPLETED>
-        //
-        ChangeMovable.Invoke();
-    }
+
 
     //Paying Owned Trap
     void TrapOwnded()
@@ -311,4 +272,36 @@ public class PlayerMovement : MonoBehaviour
             EndTurn();
         }
     }
+
+
+    void Splitter()
+    {
+        //Seting its remaining moves to a temp
+        TempMove = NumToMove;               //Remaining Moves to A Temp Move
+        NumToMove = -1;                     //Setting it as No Moves Left.
+        SplitterText.SetActive(true);
+        Splitting = true;
+    }
+
+    void SpillterExit(int Answer)
+    {
+        int SplitterNum = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().WayPointSplit;
+        SplitterControl sControl = SplitterControler.GetComponent<SplitterControl>();
+        int SplitterWayNumber = 0;
+
+        //First Splitter, DUplicate for More Splitters!
+        if (SplitterNum == 1) { SplitterWayNumber = sControl.SplitterLocation1; }
+
+        // 0 - Left, 1 - Right First Splitter, 0 = Off Main route
+        //This was Incorrect for a long time. Casuing Issues for Everyone..
+        if (Answer == 0)
+        {
+            WayPointNumber = SplitterWayNumber;
+            NumToMove = TempMove;
+        }
+        else
+        {
+            NumToMove = TempMove;
+        }
+}
 }
