@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     void Update()
-    { 
+    {
         if ((BuyPoint != null) && (BuyText != null) && FirstTImeSetup)
         {
             BuyPoint.SetActive(false);
@@ -79,13 +79,13 @@ public class PlayerMovement : MonoBehaviour
         if (Buying == true && Input.GetKeyDown(KeyCode.A))
         {
             Buying = false;
-            BuyCurrent(0);
+            TrapBuy(0);
         }
 
         if (Buying == true && Input.GetKeyDown(KeyCode.D))
         {
             Buying = false;
-            BuyCurrent(1);
+            TrapBuy(1);
         }
 
         if (Splitting && Input.GetKeyDown(KeyCode.A))
@@ -129,72 +129,46 @@ public class PlayerMovement : MonoBehaviour
         {
             NumToMove--;
             WayPointNumber++;
-            CheckPoint();
+
+            //Checking for Anything on the Way!
+            WayPointCheckerMoving();
+
+
             MovesLeftText.text = "Moves Left" + NumToMove.ToString();
         }
         else if (NumToMove == 0 && transform.position == WayPoint[WayPointNumber].transform.position)
         {
-            //Debug.Log("Finished!");
+            //Finsished Moving to Location.
             NumToMove = -1;
-            WayPointCheckeer();
 
-            //Calls a trigger to incrament a ++ of the number.
-
-            //Call method now i guess.
-            //set Num to Move back to -1? then its reset i guess?
+            //Call Waypoint Checker to See if Normal or Special
+            WayPointCheckerStopped();
         }
     }
 
     //Method to check if waypoint is Special or Defualt
-    void WayPointCheckeer()
+    void WayPointCheckerStopped()
     {
-        if (WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Owned == true)
+        //Creating General Bools to shorten other if Statments.
+        bool Owned = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Owned;
+        bool Ownable = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Ownable;
+        bool isSplitter = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter;
+
+        //Space is Owned by A Player
+        if (Owned == true)
         {
-            //If Checkpoint is taken, Will give Punishment?
-            //cehck to see if it themself? if so ignore!
-
-            //If landed is not the owner!
-            if (WayPoint[WayPointNumber].GetComponent<WayPointChecker>().OwnedBy != PlayerNumber.ToString())
-            {
-                int Transfer = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().PayAmount;
-                int NewInt = int.Parse(WayPoint[WayPointNumber].GetComponent<WayPointChecker>().OwnedBy);
-
-                SendToPlayer.GetComponent<GameController>().PlayerList[PlayerNumber - 1].Coins -= Transfer; //Take From Current Player
-                SendToPlayer.GetComponent<GameController>().PlayerList[NewInt -1].Coins += Transfer; //Give to Owned Player
-
-                //Display Coins Moving? Some Sort of text or animation!
-                EndTurn();
-            }
-            else
-            {
-                //Show you own it nothing happens?
-                EndTurn();
-            }
-
+            TrapOwnded();
         }
 
-        else if ((WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Owned == false) && (WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Ownable == true))
+        //Space is Free to Be Owned.
+        if ((Owned == false) && (Ownable == true))
         {
-            //Ask Player if they want to buy?
-            //if they do Buy.
-            //Change some sort of animation for that type of thing.
-
-            //Enable Text/Buttons.
-            //Buttons Trigger another method which player can buy or not buy...
-            //Enable a Button Allowing the User to Buy..
-            BuyPoint.SetActive(true);
-            string PlayerName = SendToPlayer.GetComponent<GameController>().PlayerList[PlayerNumber - 1].PlayerObject.name;
-            int Cost = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Cost;
-            
-            BuyText.text = PlayerName + "\nDo You wish to Buy This Checkpoint for " + Cost + "?";
-            
-            Buying = true;
-
-
+            TrapFree();
         }
 
-        else if ((WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Ownable == false) && (WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter == false))
-            {
+        //Space is Nothing.
+        if ((Ownable == false) && (isSplitter == false))
+        {
             EndTurn();
         }
     }
@@ -205,43 +179,9 @@ public class PlayerMovement : MonoBehaviour
         ChangeMovable.Invoke();
     }
 
-    void BuyCurrent(int Answer)
-    {
-        BuyPoint.SetActive(false);
-        if (Answer == 1)
-        {
-            SendToPlayer.GetComponent<GameController>().PlayerList[PlayerNumber - 1].Coins -= WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Cost;
-            WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Ownable = false;
-            WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Owned = true;
-            string OwenedByString = PlayerNumber.ToString();
-            WayPoint[WayPointNumber].GetComponent<WayPointChecker>().OwnedBy = OwenedByString;
 
-            if (PlayerNumber == 1)
-            {
-                NewMat = mat1;
-            }
-            else if (PlayerNumber == 2)
-            {
-                NewMat = mat2;
-            }
-            else if (PlayerNumber == 3)
-            {
-                NewMat = mat3;
-            }
-            else if (PlayerNumber == 4)
-            {
-                NewMat = mat4;
-            }
-            WayPoint[WayPointNumber].GetChild(0).GetChild(0).GetComponent<MeshRenderer>().material = NewMat;
-            EndTurn();
-        }
-        else
-        {
-            EndTurn();
-        }
-    }
 
-    void CheckPoint()
+    void WayPointCheckerMoving()
     {
         if (WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter == true)
         {
@@ -297,5 +237,78 @@ public class PlayerMovement : MonoBehaviour
         //MAKE THIS WAIT UNTIL THIS CHOOSING HAS BEEN COMPLETED>
         //
         ChangeMovable.Invoke();
+    }
+
+    //Paying Owned Trap
+    void TrapOwnded()
+    {
+        if (WayPoint[WayPointNumber].GetComponent<WayPointChecker>().OwnedBy != PlayerNumber.ToString())
+        {
+            int Transfer = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().PayAmount;
+            int NewInt = int.Parse(WayPoint[WayPointNumber].GetComponent<WayPointChecker>().OwnedBy);
+
+            SendToPlayer.GetComponent<GameController>().PlayerList[PlayerNumber - 1].Coins -= Transfer; //Take From Current Player
+            SendToPlayer.GetComponent<GameController>().PlayerList[NewInt - 1].Coins += Transfer; //Give to Owned Player
+
+            //Display Coins Moving? Some Sort of text or animation!
+            EndTurn();
+        }
+        else
+        {
+            //Show you own it nothing happens?
+            EndTurn();
+        }
+    }
+
+    //Buying A Trap
+    void TrapFree()
+    {
+        BuyPoint.SetActive(true);
+        string PlayerName = SendToPlayer.GetComponent<GameController>().PlayerList[PlayerNumber - 1].PlayerObject.name;
+        int Cost = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Cost;
+
+        BuyText.text = PlayerName + "\nDo You wish to Buy This Checkpoint for " + Cost + "?";
+
+        //Enable Bool For User to Press Buy Or Not.
+        Buying = true;
+    }
+    void TrapBuy(int Answer)
+    {
+        BuyPoint.SetActive(false);
+        if (Answer == 1)
+        {
+            //Deducting Cost of Space from Player.
+            SendToPlayer.GetComponent<GameController>().PlayerList[PlayerNumber - 1].Coins -= WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Cost;
+            
+            //Setting it to false.
+            WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Ownable = false;
+            WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Owned = true;
+            string OwenedByString = PlayerNumber.ToString();
+            WayPoint[WayPointNumber].GetComponent<WayPointChecker>().OwnedBy = OwenedByString;
+
+            //Setting Material so we know who Owns it!
+            if (PlayerNumber == 1)
+            {
+                NewMat = mat1;
+            }
+            else if (PlayerNumber == 2)
+            {
+                NewMat = mat2;
+            }
+            else if (PlayerNumber == 3)
+            {
+                NewMat = mat3;
+            }
+            else if (PlayerNumber == 4)
+            {
+                NewMat = mat4;
+            }
+            WayPoint[WayPointNumber].GetChild(0).GetChild(0).GetComponent<MeshRenderer>().material = NewMat;
+            EndTurn();
+        }
+        else
+        {
+            EndTurn();
+        }
     }
 }
