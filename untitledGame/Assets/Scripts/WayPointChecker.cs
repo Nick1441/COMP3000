@@ -16,9 +16,33 @@ public class WayPointChecker : MonoBehaviour
     public bool EndSplit = false;
     public int BackTrackNum = 0;
 
+    [Header("Materials")]
+    public Material mat1;
+    public Material mat2;
+    public Material mat3;
+    public Material mat4;
+    Material NewMat;
 
-    void Update()
+
+    public void UpdateColor()
     {
-        
+        if (OwnedBy == "1")
+        {
+            NewMat = mat1;
+        }
+        else if (OwnedBy == "2")
+        {
+            NewMat = mat2;
+        }
+        else if (OwnedBy == "3")
+        {
+            NewMat = mat3;
+        }
+        else if (OwnedBy == "4")
+        {
+            NewMat = mat4;
+        }
+
+        this.transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>().material = NewMat;
     }
 }

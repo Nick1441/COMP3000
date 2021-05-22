@@ -11,5 +11,6 @@ public class Player
     public GameObject PlayerObject;
     public GameObject RollOrder;
 
-    public int Coins;
+    public int Coins = 0;
+    public int Crowns = 0;
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.Events;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class OnCameraChange : UnityEvent<int> { }
@@ -34,6 +35,10 @@ public class GameController : MonoBehaviour
     //bool Input;
 
     public GameObject RollButton;
+
+    [Header("Dice Rolling Image")]
+    public GameObject DiceRollingImage;
+    public GameObject PlayerRollOrderImage;
 
     [Header("Initial Roll Items")]
     public GameObject InitTextObj;
@@ -84,7 +89,17 @@ public class GameController : MonoBehaviour
     public GameObject Text9;
     public GameObject Text10;
 
+    [Header("MiniGame Selector")]
+    public GameObject MiniGameUI;
+    bool MiniGameSelectorActive = false;
+
+    [Header("Saving/Loading Minigame Info")]
+    ClassSaver CrossGameInfo;
+    public Text INTTHING;
+
+    [Header("Other")]
     SavingLoading InData;
+    public GameObject[] WayPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -255,7 +270,7 @@ public class GameController : MonoBehaviour
     }
 
     public void RollLoopText()
-    {
+    {   //THIS ISNT CHECKING FOR AFTER SWITCHER OR SOMETHIGN - NEEDS FIXING
         if (RollLoopInt != PlayerAmount)
         {
             for (int i = 0; i < PlayerList.Count; i++)
@@ -274,19 +289,24 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            //if i dont buy it doesnt work?
+            //Male sure we cant move
             //After Each Turn
             //This will load into the next scene.
             //Enable a way to pick a MiniGame e.g. Enable a selector Menu
 
             //This should disable any other movements?
-            RollLoopBool = false;
-            Movable = false;
+            //RollLoopBool = false;
+            //Movable = false;
 
-            RollNextGameObject.SetActive(false);
+            //RollNextGameObject.SetActive(false);
             //Debug.Log("Hit Last?");
-            Text5.SetActive(true);
+            //Text5.SetActive(true);
             //SET SO CAN ONLY CALL ONCE< THIS IS WHERE THE OPTION TO LOAD NEXT SCEBNE IS! CHANGE IT UP ALSO SO THAT PLAYERS CANT ROLL
             //Call MiniGame Etc??
+
+            //MNAKE THIS WAIT FOR GO TO BE FULLY OVER!
+            PickMiniGame();
         }
     }
 
@@ -315,8 +335,17 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(PlayerAmount + "<- Player Amount");
-        
+        INTTHING.text = "ROLL INT " + RollLoopInt;
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SaveGameData();
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            LoadGameData();
+        }
+
         Text7.GetComponent<Text>().text = PlayerList[0].Name;
         Text8.GetComponent<Text>().text = PlayerList[1].Name;
         if (PlayerAmount == 3)
@@ -346,28 +375,21 @@ public class GameController : MonoBehaviour
             RollLoopText();
         }
 
-        //Debug.Log(PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber.ToString());
 
-
-        Player1Coins = PlayerList[0].Coins;
-        Player2Coins = PlayerList[1].Coins;
-
-
-        Text1.GetComponent<Text>().text = "Player 1 Coins = " + PlayerList[0].Coins.ToString();
-        Text2.GetComponent<Text>().text = "Player 2 Coins = " + PlayerList[1].Coins.ToString();
-        if (PlayerAmount == 3)
+        //Minigame Selector
+        if (MiniGameSelectorActive == true && (Input.GetKeyDown(KeyCode.Q)))
         {
-            Player3Coins = PlayerList[2].Coins;
-            Text3.GetComponent<Text>().text = "Player 3 Coins = " + PlayerList[2].Coins.ToString();
+            //Selected MiniGame 1
+            MiniGameSelectorActive = false;
+            SelectedMiniGame(1);
         }
-        else if (PlayerAmount == 4)
+        else if (MiniGameSelectorActive == true && (Input.GetKeyDown(KeyCode.E)))
         {
-            Player3Coins = PlayerList[2].Coins;
-            Player4Coins = PlayerList[3].Coins;
-
-            Text3.GetComponent<Text>().text = "Player 3 Coins = " + PlayerList[2].Coins.ToString();
-            Text4.GetComponent<Text>().text = "Player 4 Coins = " + PlayerList[3].Coins.ToString();
+            //Selected MiniGame 2
+            MiniGameSelectorActive = false;
+            SelectedMiniGame(2);
         }
+
 
     }
 
@@ -381,67 +403,6 @@ public class GameController : MonoBehaviour
         Movable = true;
     }
 
-
-
-    void LoadData()
-    {
-        //Setting the List to the current Data.
-        //PlayerList.Clear();
-        //PlayerList = SceneSwitcher.GetComponent<GameTransferData>().PlayerListSwitch;
-
-
-        //Setting the position to the last set data.
-        //PlayerList[0].PlayerObject.transform.position = PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPoint[PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber].transform.position;
-        //PlayerList[1].PlayerObject.transform.position = PlayerList[1].PlayerObject.GetComponent<PlayerMovement>().WayPoint[PlayerList[1].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber].transform.position;
-
-        //if (PlayerAmount == 3)
-        //{
-        //    PlayerList[2].PlayerObject.transform.position = PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPoint[PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber].transform.position;
-        //}
-        //else if (PlayerAmount == 4)
-        //{
-        //    PlayerList[2].PlayerObject.transform.position = PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPoint[PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber].transform.position;
-        //    PlayerList[3].PlayerObject.transform.position = PlayerList[3].PlayerObject.GetComponent<PlayerMovement>().WayPoint[PlayerList[3].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber].transform.position;
-        //}
-        //WILL NEED TO BE DONE WITH WAYPOINTS
-        //WILL NEED TO BE DONE WITH CHESTS
-
-
-
-        //Get the Waypoint Number from Player Prefs.
-        //Set the Position of that one to the Waypoint.
-        int WP1 = PlayerPrefs.GetInt("P1WP");
-        int WP2 = PlayerPrefs.GetInt("P2WP");
-
-        PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = WP1;
-        PlayerList[1].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = WP2;
-
-        PlayerList[0].PlayerObject.transform.position = PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPoint[WP1].transform.position;
-        PlayerList[1].PlayerObject.transform.position = PlayerList[1].PlayerObject.GetComponent<PlayerMovement>().WayPoint[WP2].transform.position;
-
-        if (PlayerAmount == 3)
-        {
-            int WP3 = PlayerPrefs.GetInt("P3WP");
-
-            PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = WP3;
-
-            PlayerList[2].PlayerObject.transform.position = PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPoint[WP3].transform.position;
-        }
-        else if (PlayerAmount == 4)
-        {
-            int WP3 = PlayerPrefs.GetInt("P3WP");
-            int WP4 = PlayerPrefs.GetInt("P4WP");
-
-            PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = WP3;
-            PlayerList[3].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = WP4;
-
-            PlayerList[2].PlayerObject.transform.position = PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPoint[WP3].transform.position;
-            PlayerList[3].PlayerObject.transform.position = PlayerList[3].PlayerObject.GetComponent<PlayerMovement>().WayPoint[WP4].transform.position;
-        }
-
-
-    }
-
     public void SaveData()
     {
         SceneSwitcherSorter[0].GetComponent<GameTransferData>().SwitchScene();
@@ -450,12 +411,163 @@ public class GameController : MonoBehaviour
 
     public void LoadDataJSON()
     {
-        Debug.Log(Application.persistentDataPath);
         InData = JsonUtility.FromJson<SavingLoading>(File.ReadAllText(Application.persistentDataPath + "/saveload.json"));
     }
 
     public void PickMiniGame()
     {
+        //Enable MiniGame Selector UI
+        MiniGameUI.SetActive(true);
 
+        //Disable Rolling Features
+        RollLoopBool = false;
+        Movable = false;
+
+        //Disable Other UI
+        DiceRollingImage.SetActive(false);
+        PlayerRollOrderImage.SetActive(false);
+        RollNextGameObject.SetActive(false);
+        
+        //Toggle MiniGame Selector So User Can Pick
+        MiniGameSelectorActive = true;
+    }
+
+    public void SelectedMiniGame(int selected)
+    {
+        //Create Saving Data to Be Loaded Back into Game!
+
+        //Load Selected MiniGame
+        string newScene = "MiniGame" + selected.ToString();
+        SceneManager.LoadScene(newScene);
+        SaveGameData();
+    }
+
+    //
+    // Used when moving between scenes, saves all required Infomation
+    //
+    public void SaveGameData()
+    {
+        //This is when Minigames Are Loaded, Each Attribute will be saved.
+        ClassSaver classSaver = new ClassSaver();
+
+        string JsonPath = Application.persistentDataPath + "/Test.json";
+        //Save Array of Waypoints into List.
+        WayPointChecker PointCheck;
+        foreach (GameObject point in WayPoint)
+        {
+            PointCheck = point.GetComponent<WayPointChecker>();
+
+            WayPoint WayToList = new WayPoint();
+
+            WayToList.Owned = PointCheck.Owned;
+            WayToList.OwnedBy = PointCheck.OwnedBy;
+            WayToList.Cost = PointCheck.Cost;
+            WayToList.PayAmount = PointCheck.PayAmount;
+            WayToList.Ownable = PointCheck.Ownable;
+            WayToList.Splitter = PointCheck.Splitter;
+            WayToList.WayPointSplit = PointCheck.WayPointSplit;
+            WayToList.EndSplit = PointCheck.EndSplit;
+            WayToList.BackTrackNum = PointCheck.BackTrackNum;
+
+            classSaver.wayPointSaveList.Add(WayToList);
+        }
+
+        //Save Players Current Postition and Points/Crowns.
+        PlayerSaver playersave = new PlayerSaver();
+
+        playersave.P1Pos = PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber;
+        playersave.P1Points = PlayerList[0].Coins;
+        playersave.P1Crowns = PlayerList[0].Crowns;
+
+        playersave.P2Pos = PlayerList[1].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber;
+        playersave.P2Points = PlayerList[1].Coins;
+        playersave.P2Crowns = PlayerList[1].Crowns;
+
+        Debug.Log(PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber);
+
+        if (PlayerAmount == 3 || PlayerAmount == 4)
+        {
+            playersave.P3Pos = PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber;
+            playersave.P3Points = PlayerList[2].Coins;
+            playersave.P3Crowns = PlayerList[2].Crowns;
+        }
+
+        if (PlayerAmount == 4)
+        {
+            playersave.P4Pos = PlayerList[3].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber;
+            playersave.P4Points = PlayerList[3].Coins;
+            playersave.P4Crowns = PlayerList[3].Crowns;
+        }
+
+        classSaver.savePayerPos.Add(playersave);
+        
+        Debug.Log("SAVING");
+        string JSONDATA = JsonUtility.ToJson(classSaver, true);
+        File.WriteAllText(JsonPath, JSONDATA);
+    }
+    public void LoadGameData()
+    {
+        Debug.Log("Loading Data");
+        //This will be ran after a minigame has been played. It will sort everyone to their relevent location/stats/Waypoints info.
+        CrossGameInfo = JsonUtility.FromJson<ClassSaver>(File.ReadAllText(Application.persistentDataPath + "/Test.json"));
+
+        //Set Player Info to What it use to be.
+        PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = CrossGameInfo.savePayerPos[0].P1Pos;
+        PlayerList[1].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = CrossGameInfo.savePayerPos[0].P2Pos;
+
+        //Set Locations for players as otherwise they slowly move there. Checking to see if anyone is on start Stil also
+        if (CrossGameInfo.savePayerPos[0].P1Pos != 0)
+        {
+            PlayerList[0].PlayerObject.transform.position = WayPoint[CrossGameInfo.savePayerPos[0].P1Pos - 1].transform.position;
+        }
+
+        if (CrossGameInfo.savePayerPos[0].P2Pos != 0)
+        {
+            PlayerList[1].PlayerObject.transform.position = WayPoint[CrossGameInfo.savePayerPos[0].P2Pos - 1].transform.position;
+        }
+
+        PlayerList[0].Crowns = CrossGameInfo.savePayerPos[0].P1Crowns;
+        PlayerList[1].Crowns = CrossGameInfo.savePayerPos[0].P2Crowns;
+
+        PlayerList[0].Coins = CrossGameInfo.savePayerPos[0].P1Points;
+        PlayerList[1].Coins = CrossGameInfo.savePayerPos[0].P2Points;
+
+        if (PlayerAmount == 3 || PlayerAmount == 4)
+        {
+            PlayerList[2].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = CrossGameInfo.savePayerPos[0].P3Pos;
+            PlayerList[2].Crowns = CrossGameInfo.savePayerPos[0].P3Crowns;
+            PlayerList[2].Coins = CrossGameInfo.savePayerPos[0].P3Points;
+            if (CrossGameInfo.savePayerPos[0].P3Pos != 0)
+            {
+                PlayerList[2].PlayerObject.transform.position = WayPoint[CrossGameInfo.savePayerPos[0].P3Pos - 1].transform.position;
+            }
+            
+        }
+
+        if (PlayerAmount == 4)
+        {
+            PlayerList[3].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber = CrossGameInfo.savePayerPos[0].P4Pos;
+            PlayerList[3].Crowns = CrossGameInfo.savePayerPos[0].P4Crowns;
+            PlayerList[3].Coins = CrossGameInfo.savePayerPos[0].P4Points;
+            if (CrossGameInfo.savePayerPos[0].P4Pos != 0)
+            {
+                PlayerList[3].PlayerObject.transform.position = WayPoint[CrossGameInfo.savePayerPos[0].P4Pos - 1].transform.position;
+            }
+        }
+
+        //Loading WayPoints Into Current Array.
+        for (int i = 0; i < CrossGameInfo.wayPointSaveList.Count(); i++)
+        {
+            WayPoint[i].GetComponent<WayPointChecker>().Owned = CrossGameInfo.wayPointSaveList[i].Owned;
+            WayPoint[i].GetComponent<WayPointChecker>().OwnedBy = CrossGameInfo.wayPointSaveList[i].OwnedBy;
+
+            if (WayPoint[i].GetComponent<WayPointChecker>().Owned = CrossGameInfo.wayPointSaveList[i].Owned == true)
+            {
+                WayPoint[i].GetComponent<WayPointChecker>().UpdateColor();
+            }
+            
+        }
+
+        Debug.Log("Data Loading Complete");
     }
 }

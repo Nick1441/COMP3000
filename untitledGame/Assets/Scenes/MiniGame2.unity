@@ -2762,7 +2762,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MiniGame1
+  m_Text: 'MiniGame2
+
+'
 --- !u!222 &935056689
 CanvasRenderer:
   m_ObjectHideFlags: 0

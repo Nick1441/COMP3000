@@ -291,6 +291,6 @@ public class PlayerMovement : MonoBehaviour
         //
         //MAKE THIS WAIT UNTIL THIS CHOOSING HAS BEEN COMPLETED>
         //
-        EndTurn();
+        //ChangeMovable.Invoke();
     }
 }

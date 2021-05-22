@@ -24,10 +24,10 @@ public class DiceRoll : MonoBehaviour
         Velocity = rigid.velocity;
 
         //This is where custom code will be implamented to Create the Dice Moving/Triggers Created.
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            DiceRollV2();
-        }
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    DiceRollV2();
+        //}
         THIS = TestInt;
     }
 
