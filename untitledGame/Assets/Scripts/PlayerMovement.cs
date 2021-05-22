@@ -192,6 +192,11 @@ public class PlayerMovement : MonoBehaviour
 
 
         }
+
+        else if ((WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Ownable == false) && (WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter == false))
+            {
+            EndTurn();
+        }
     }
 
     void EndTurn()
@@ -291,6 +296,6 @@ public class PlayerMovement : MonoBehaviour
         //
         //MAKE THIS WAIT UNTIL THIS CHOOSING HAS BEEN COMPLETED>
         //
-        //ChangeMovable.Invoke();
+        ChangeMovable.Invoke();
     }
 }

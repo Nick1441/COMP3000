@@ -307,6 +307,12 @@ public class GameController : MonoBehaviour
 
             //MNAKE THIS WAIT FOR GO TO BE FULLY OVER!
             PickMiniGame();
+
+            int num = TempPlayer.PlayerObject.GetComponent<PlayerMovement>().WayPointNumber;
+            if (TempPlayer.PlayerObject.transform.position == WayPoint[num].transform.position)
+            {
+                Debug.Log("ARIVED");
+            }
         }
     }
 
