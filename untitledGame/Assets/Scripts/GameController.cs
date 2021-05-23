@@ -34,6 +34,8 @@ public class GameController : MonoBehaviour
     //int CurrentTurn = 1;
     //bool Input;
 
+    bool AfterMiniGameBool = false;
+
     public GameObject RollButton;
 
     [Header("Dice Rolling Image")]
@@ -63,13 +65,13 @@ public class GameController : MonoBehaviour
     public int Player;
     public int Movess;
     public GameObject SceneSwitcher;
-    public GameObject[] SceneSwitcherSorter;
 
     public bool RollLoopBool = false;
     public int RollLoopInt = 0;
 
+    public bool RollLoopAfterBool = false;
     public bool Movable = true;
-
+    public bool IgnorePlacements = true;
 
     [Header("Player Stats")]
     public int Player1Coins = 0;
@@ -100,14 +102,15 @@ public class GameController : MonoBehaviour
     [Header("Other")]
     SavingLoading InData;
     public GameObject[] WayPoint;
-
+    public GameObject Camera;
     // Start is called before the first frame update
     void Start()
     {
-        //SceneSwitcher = GameObject.FindGameObjectWithTag("SceneSwitcher");
+        SceneSwitcher = GameObject.FindGameObjectWithTag("SceneSwitcher");
 
         LoadDataJSON();
-            
+
+        Camera = GameObject.FindGameObjectWithTag("MainCamera");
         Player1Info.PlayerObject = GameObject.FindGameObjectWithTag("Player1");
         Player2Info.PlayerObject = GameObject.FindGameObjectWithTag("Player2");
         Player3Info.PlayerObject = GameObject.FindGameObjectWithTag("Player3");
@@ -127,22 +130,17 @@ public class GameController : MonoBehaviour
         TextDieSmall.text = "Press Space To Roll";
         TextDieInit.text = "Highest Roll Moves First!";
 
-
-
-        SceneSwitcherSorter = GameObject.FindGameObjectsWithTag("SceneSwitcher");
-
-        if (SceneSwitcherSorter.Length == 2)
-        //if (SceneSwitcherSorter[1] != null)
+        //Loading Data from Previos Main Level Using.
+        if (SceneSwitcher.GetComponent<SceneSwitcher>().fromMiniGame == true)
         {
-            Destroy(SceneSwitcherSorter[1]);
+            IgnorePlacements = true;
+            SceneSwitcher.GetComponent<SceneSwitcher>().fromMiniGame = false;
+            LoadGameData();
+            LoadAfterMiniGame();
+            //TextDie.enabled = false;
+            //TextDieSmall.enabled = false;
+            //TextDieInit.enabled = false;
         }
-
-        //if (SceneSwitcherSorter[0].GetComponent<GameTransferData>().LoadingMainGame)
-        //{
-        //    //LoadData();
-        //    SceneSwitcherSorter[0].GetComponent<GameTransferData>().LoadingMainGame = false;
-        //}
-
     }
 
 
@@ -164,8 +162,6 @@ public class GameController : MonoBehaviour
         Player2Info.PlayerNumber = 2;
         Player3Info.PlayerNumber = 3;
         Player4Info.PlayerNumber = 4;
-
-
 
         Player1Info.RollOrder.transform.GetChild(0).GetComponent<Text>().text = Player1Info.Name;
         Player2Info.RollOrder.transform.GetChild(0).GetComponent<Text>().text = Player2Info.Name;
@@ -201,10 +197,11 @@ public class GameController : MonoBehaviour
 
     public void PlayerPickerSecond(int rolled)
     {
+        //Debug.Log("PLAYER PICKER SECOND");
         PlayerList[FirstRollInt].CurrentRoll = rolled;
 
         TextDie.text = PlayerList[FirstRollInt].Name.ToString() + " Rolled " + PlayerList[FirstRollInt].CurrentRoll.ToString();
-
+        PlayerList[FirstRollInt].RollOrder.transform.GetChild(3).GetComponent<Text>().text = PlayerList[FirstRollInt].CurrentRoll.ToString();
         if (FirstRollInt + 1 == PlayerAmount)
         {
             TextDieSmall.text = "Press Space To Start Play!";
@@ -220,6 +217,7 @@ public class GameController : MonoBehaviour
 
     public void PlayerPicker()
     {
+        //Debug.Log("PLAYER PICKER");
         if (FirstRollInt != PlayerAmount)
         {
             TextDieInit.GetComponent<Text>().enabled = false;
@@ -270,7 +268,8 @@ public class GameController : MonoBehaviour
     }
 
     public void RollLoopText()
-    {   //THIS ISNT CHECKING FOR AFTER SWITCHER OR SOMETHIGN - NEEDS FIXING
+    {
+        //Debug.Log("ROLL LOOP TEXT");
         if (RollLoopInt != PlayerAmount)
         {
             for (int i = 0; i < PlayerList.Count; i++)
@@ -283,29 +282,12 @@ public class GameController : MonoBehaviour
 
             RollNextText.text = TempPlayer.Name.ToString() + "'s Roll";
             MovesLeftText2.text = TempPlayer.Name + " Rolled " + Rolled.ToString();
+            
             RollNextGameObject.SetActive(true);
-
             //Debug.Log(TempPlayer.PlayerNumber);
         }
         else
         {
-            //if i dont buy it doesnt work?
-            //Male sure we cant move
-            //After Each Turn
-            //This will load into the next scene.
-            //Enable a way to pick a MiniGame e.g. Enable a selector Menu
-
-            //This should disable any other movements?
-            //RollLoopBool = false;
-            //Movable = false;
-
-            //RollNextGameObject.SetActive(false);
-            //Debug.Log("Hit Last?");
-            //Text5.SetActive(true);
-            //SET SO CAN ONLY CALL ONCE< THIS IS WHERE THE OPTION TO LOAD NEXT SCEBNE IS! CHANGE IT UP ALSO SO THAT PLAYERS CANT ROLL
-            //Call MiniGame Etc??
-
-            //MNAKE THIS WAIT FOR GO TO BE FULLY OVER!
             PickMiniGame();
 
             int num = TempPlayer.PlayerObject.GetComponent<PlayerMovement>().WayPointNumber;
@@ -341,16 +323,10 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        INTTHING.text = "ROLL INT " + RollLoopInt;
+        PlayerStats();
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            SaveGameData();
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            LoadGameData();
-        }
+
+
 
         Text7.GetComponent<Text>().text = PlayerList[0].Name;
         Text8.GetComponent<Text>().text = PlayerList[1].Name;
@@ -382,6 +358,20 @@ public class GameController : MonoBehaviour
         }
 
 
+        if (AfterMiniGameBool)
+        {
+            RollLoopText();
+            //AfterMiniLoop();
+        }
+        if ((Input.GetKeyDown(KeyCode.Space)) && (AfterMiniGameBool) && (Movable))
+        {
+            RollLoop();
+            Movable = false;
+        }
+
+
+
+
         //Minigame Selector
         if (MiniGameSelectorActive == true && (Input.GetKeyDown(KeyCode.Q)))
         {
@@ -408,12 +398,6 @@ public class GameController : MonoBehaviour
     {
         Movable = true;
     }
-
-    public void SaveData()
-    {
-        SceneSwitcherSorter[0].GetComponent<GameTransferData>().SwitchScene();
-    }
-
 
     public void LoadDataJSON()
     {
@@ -443,9 +427,13 @@ public class GameController : MonoBehaviour
         //Create Saving Data to Be Loaded Back into Game!
 
         //Load Selected MiniGame
+
+        //Save All Required Data
+        SaveGameData();
+
+        //Load New Scene
         string newScene = "MiniGame" + selected.ToString();
         SceneManager.LoadScene(newScene);
-        SaveGameData();
     }
 
     //
@@ -575,5 +563,70 @@ public class GameController : MonoBehaviour
         }
 
         Debug.Log("Data Loading Complete");
+    }
+
+    void PlayerStats()
+    {
+
+        Player1Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = Player1Info.Crowns.ToString();
+        Player1Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = Player1Info.Coins.ToString();
+
+    }
+
+    void LoadAfterMiniGame()
+    {
+        //Get Order into 4 ints?
+        //Organise This into the new levels?
+        //274
+        //Mkake it so it can be reused now throughout the game.
+        //Wont have to make new shit.
+
+
+        //Getting Placements from Last MiniGame
+        int[] Placements = new int[4];
+
+        Placements[0] = SceneSwitcher.GetComponent<SceneSwitcher>().First;
+        Placements[1] = SceneSwitcher.GetComponent<SceneSwitcher>().Second;
+        Placements[2] = SceneSwitcher.GetComponent<SceneSwitcher>().Third;
+        Placements[3] = SceneSwitcher.GetComponent<SceneSwitcher>().Fourth;
+
+        for (int i = 0; i < PlayerAmount; i++)
+        {
+            if (Placements[0] == i + 1)
+            {
+                Debug.Log("WORKED");
+                PlayerList[i].Order = 1;
+                Camera.transform.position = PlayerList[i].PlayerObject.transform.GetChild(0).position;
+            }
+            if (Placements[1] == i + 1)
+            {
+                PlayerList[i].Order = 2;
+            }
+            if (Placements[2] == i + 1)
+            {
+                PlayerList[i].Order = 3;
+            }
+            if (Placements[3] == i + 1)
+            {
+                PlayerList[i].Order = 4;
+            }
+        }
+
+        Debug.Log("Roll Order P1 - " + PlayerList[0].Order);
+        Debug.Log("Roll Order P2 - " + PlayerList[1].Order);
+        //Debug.Log("Roll Order P3 - " + PlayerList[2].Order);
+        //Debug.Log("Roll Order P4 - " + PlayerList[3].Order);
+
+        //Enable Code from Before? Might be able to get it to work!
+        FirstRoll = false;
+        Movable = true;
+        InitTextObj.SetActive(false);
+        RollButton.SetActive(false);
+        //RollLoopBool = true;
+        AfterMiniGameBool = true;
+        RollLoopInt = 0;
+
+
+        //Sort Camera Out? to New Top Player?
     }
 }

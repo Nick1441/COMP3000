@@ -42,26 +42,24 @@ public class PlayerMovement : MonoBehaviour
     public Material mat4;
     Material NewMat;
 
-    [Header("Splitter Spaces")]
-    public int Splitter1;
-    public int Spiltter2;
-    public int Splitter3;
     [Space]
     public GameObject SplitterText;
     bool Splitting = false;
     public int SplitterNumber = 0;
     GameObject SplitterControler;
-    
+    GameObject gameController;
+    public bool test;
 
     GameObject SendToPlayer;
     void Start()
     {
         //transform.position = WayPoint[WayPointNumber].transform.position;
         //Debug.Log("WORKING");
+        gameController = GameObject.FindGameObjectWithTag("Controller");
+        test = gameController.GetComponent<GameController>().IgnorePlacements;
         SendToPlayer = GameObject.FindGameObjectWithTag("Controller");
         BuyPoint = GameObject.FindGameObjectWithTag("BuyWayPoint");
         BuyText = GameObject.FindGameObjectWithTag("BuyText").GetComponent<Text>();
-        //BuyPoint.SetActive(false);
 
         SplitterText.SetActive(false);
         SplitterControler = GameObject.FindGameObjectWithTag("SPLITTERCONTROL");
@@ -70,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
+        Debug.Log(test);
         if ((BuyPoint != null) && (BuyText != null) && FirstTImeSetup)
         {
             BuyPoint.SetActive(false);
@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
         {
             NumToMove--;
             WayPointNumber++;
-
+            test = false;
             //Checking for Anything on the Way!
             WayPointCheckerMoving();
 
@@ -152,30 +152,34 @@ public class PlayerMovement : MonoBehaviour
     //Method to check if waypoint is Special or Defualt
     void WayPointCheckerStopped()
     {
-        //Will not Trigger on Starting Point.
-        if (WayPoint[WayPointNumber].GetComponent<WayPointChecker>() != null)
+        if (test == false)
         {
-            //Creating General Bools to shorten other if Statments.
-            bool Owned = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Owned;
-            bool Ownable = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Ownable;
-            bool isSplitter = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter;
-
-            //Space is Owned by A Player
-            if (Owned == true)
+            //Will not Trigger on Starting Point.
+            if (WayPoint[WayPointNumber].GetComponent<WayPointChecker>() != null)
             {
-                TrapOwnded();
-            }
+                //Creating General Bools to shorten other if Statments.
+                bool Owned = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Owned;
+                bool Ownable = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Ownable;
+                bool isSplitter = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter;
 
-            //Space is Free to Be Owned.
-            if ((Owned == false) && (Ownable == true))
-            {
-                TrapFree();
-            }
+                //Space is Owned by A Player
+                if (Owned == true)
+                {
+                    TrapOwnded();
+                }
 
-            //Space is Nothing.
-            if ((Ownable == false) && (isSplitter == false))
-            {
-                EndTurn();
+                //Space is Free to Be Owned.
+                else if ((Owned == false) && (Ownable == true))
+                {
+                    Debug.Log("TRAP FREE");
+                    TrapFree();
+                }
+
+                //Space is Nothing.
+                else if ((Ownable == false) && (isSplitter == false))
+                {
+                    EndTurn();
+                }
             }
         }
     }

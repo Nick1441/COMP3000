@@ -16,6 +16,7 @@ TagManager:
   - Controller
   - BuyWayPoint
   - BuyText
+  - SPLITTERCONTROL
   layers:
   - Default
   - TransparentFX

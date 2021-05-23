@@ -10,22 +10,18 @@ public class Test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Switcher = GameObject.FindGameObjectWithTag("SceneSwitcher");
-        //if (Switcher.GetComponent<GameTransferData>().LoadingMiniGame1 == true)
-        //{
-        //    Switcher.GetComponent<GameTransferData>().LoadingMiniGame1 = false;
-        //}
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Switcher = GameObject.FindGameObjectWithTag("SceneSwitcher");
     }
 
     public void NOW()
     {
-        Switcher.GetComponent<GameTransferData>().LoadingMainGame = true;
+        Switcher.GetComponent<SceneSwitcher>().fromMiniGame = true;
+
+        Switcher.GetComponent<SceneSwitcher>().First = 2;
+        Switcher.GetComponent<SceneSwitcher>().Second = 1;
+        Switcher.GetComponent<SceneSwitcher>().Third = 3;
+        Switcher.GetComponent<SceneSwitcher>().Fourth = 4;
+
         SceneManager.LoadScene("MainGame");
     }
 }
