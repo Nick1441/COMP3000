@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class WayPointChecker : MonoBehaviour
 {
+    [Header("Types")]
+    public bool Ownable = false;
+    public bool Splitter = false;
+    public bool Blank = false;
+
+    [Space]
+    [Header("Trap Variables")]
     public bool Owned = false;
     public string OwnedBy = "";
     public int Cost = 0;
     public int PayAmount = 0;
-    public bool Ownable = false;
 
-    public bool Splitter = false;
+    [Space]
+    [Header("Splitter Variables")]
     public int WayPointSplit = 0;
-
     public bool EndSplit = false;
+
+    [Space]
+    [Header("OTHER")]
     public int BackTrackNum = 0;
 
     [Header("Materials")]

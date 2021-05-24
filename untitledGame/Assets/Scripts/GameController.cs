@@ -462,6 +462,7 @@ public class GameController : MonoBehaviour
             WayToList.WayPointSplit = PointCheck.WayPointSplit;
             WayToList.EndSplit = PointCheck.EndSplit;
             WayToList.BackTrackNum = PointCheck.BackTrackNum;
+            WayToList.Blank = PointCheck.Blank;
 
             classSaver.wayPointSaveList.Add(WayToList);
         }

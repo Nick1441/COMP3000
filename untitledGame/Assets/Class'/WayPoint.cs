@@ -9,6 +9,7 @@ public class WayPoint
     public int Cost;
     public int PayAmount;
     public bool Ownable;
+    public bool Blank;
 
     public bool Splitter;
     public int WayPointSplit;

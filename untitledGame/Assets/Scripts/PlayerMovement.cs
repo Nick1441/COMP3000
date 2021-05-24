@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     GameObject SplitterControler;
     GameObject gameController;
     public bool test;
+    bool EndSplitter = false;
 
     GameObject SendToPlayer;
     void Start()
@@ -161,6 +162,7 @@ public class PlayerMovement : MonoBehaviour
                 bool Owned = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Owned;
                 bool Ownable = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Ownable;
                 bool isSplitter = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter;
+                bool isBlank = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Blank;
 
                 //Space is Owned by A Player
                 if (Owned == true)
@@ -176,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 //Space is Nothing.
-                else if ((Ownable == false) && (isSplitter == false))
+                else if (isBlank == true)
                 {
                     EndTurn();
                 }
@@ -194,11 +196,17 @@ public class PlayerMovement : MonoBehaviour
 
     void WayPointCheckerMoving()
     {
-        bool isSplitter = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter == true;
+        bool isSplitter = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter;
+        bool isSplitterEnd = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().EndSplit;
 
-        if (isSplitter == true)
+        if ((isSplitter == true) && (isSplitterEnd == false))
         {
             Splitter();
+        }
+
+        if ((isSplitter == true) && (isSplitterEnd == true))
+        {
+            SplitterEnd();
         }
     }
 
@@ -295,6 +303,8 @@ public class PlayerMovement : MonoBehaviour
 
         //First Splitter, DUplicate for More Splitters!
         if (SplitterNum == 1) { SplitterWayNumber = sControl.SplitterLocation1; }
+        if (SplitterNum == 2) { SplitterWayNumber = sControl.SplitterLocation2; }
+
 
         // 0 - Left, 1 - Right First Splitter, 0 = Off Main route
         //This was Incorrect for a long time. Casuing Issues for Everyone..
@@ -308,4 +318,17 @@ public class PlayerMovement : MonoBehaviour
             NumToMove = TempMove;
         }
 }
+
+    void SplitterEnd()
+    {
+        int toMove = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().WayPointSplit;
+
+        int NewWay = 0;
+
+        if (toMove == 1) { NewWay = SplitterControler.GetComponent<SplitterControl>().SplitterEndLocation1; }
+        if (toMove == 2) { NewWay = SplitterControler.GetComponent<SplitterControl>().SplitterEndLocation2; }
+        if (toMove == 3) { NewWay = SplitterControler.GetComponent<SplitterControl>().SplitterEndLocation3; }
+
+        WayPointNumber = NewWay;
+    }
 }
