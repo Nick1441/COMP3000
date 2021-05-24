@@ -572,18 +572,24 @@ public class GameController : MonoBehaviour
         Player1Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = Player1Info.Crowns.ToString();
         Player1Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = Player1Info.Coins.ToString();
 
+        Player2Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = Player2Info.Crowns.ToString();
+        Player2Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = Player2Info.Coins.ToString();
+
+        if (PlayerAmount == 3 || PlayerAmount == 4)
+        {
+            Player3Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = Player3Info.Crowns.ToString();
+            Player3Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = Player3Info.Coins.ToString();
+        }
+
+        if (PlayerAmount == 4)
+        {
+            Player4Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = Player4Info.Crowns.ToString();
+            Player4Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = Player4Info.Coins.ToString();
+        }
     }
 
     void LoadAfterMiniGame()
     {
-        //Get Order into 4 ints?
-        //Organise This into the new levels?
-        //274
-        //Mkake it so it can be reused now throughout the game.
-        //Wont have to make new shit.
-
-
-        //Getting Placements from Last MiniGame
         int[] Placements = new int[4];
 
         Placements[0] = SceneSwitcher.GetComponent<SceneSwitcher>().First;
