@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
     public OnPlayerRollType rollType;
     //Setting Paramaters
     public int PlayerAmount = 0;
+    public int CrownTarget = 1;
     //int CurrentTurn = 1;
     //bool Input;
 
@@ -74,10 +75,10 @@ public class GameController : MonoBehaviour
     public bool IgnorePlacements = true;
 
     [Header("Player Stats")]
-    public int Player1Coins = 0;
-    public int Player2Coins = 0;
-    public int Player3Coins = 0;
-    public int Player4Coins = 0;
+    public int Player1Coins = 50;
+    public int Player2Coins = 10;
+    public int Player3Coins = 10;
+    public int Player4Coins = 10;
 
     [Header("Player Demo Text")]
     public GameObject Text1;
@@ -103,6 +104,10 @@ public class GameController : MonoBehaviour
     SavingLoading InData;
     public GameObject[] WayPoint;
     public GameObject Camera;
+    public GameObject SplitterControler;
+
+    [Header("Chest Info")]
+    int LastChestNumber;
     // Start is called before the first frame update
     void Start()
     {
@@ -123,6 +128,8 @@ public class GameController : MonoBehaviour
 
         //PlayerAmount = PlayerPrefs.GetInt("PCount");
         PlayerAmount = InData.PCount;
+        CrownTarget = InData.Crown;
+        
 
         CreatePlayers();
 
@@ -140,6 +147,10 @@ public class GameController : MonoBehaviour
             //TextDie.enabled = false;
             //TextDieSmall.enabled = false;
             //TextDieInit.enabled = false;
+        }
+        else //Only First Time Setup
+        {
+            GenerateFirstChest();
         }
     }
 
@@ -167,6 +178,11 @@ public class GameController : MonoBehaviour
         Player2Info.RollOrder.transform.GetChild(0).GetComponent<Text>().text = Player2Info.Name;
         Player3Info.RollOrder.transform.GetChild(0).GetComponent<Text>().text = Player3Info.Name;
         Player4Info.RollOrder.transform.GetChild(0).GetComponent<Text>().text = Player4Info.Name;
+
+        Player1Info.Coins = Player1Coins;
+        Player2Info.Coins = Player2Coins;
+        Player3Info.Coins = Player3Coins;
+        Player4Info.Coins = Player4Coins;
 
         PlayerList.Add(Player1Info);
         PlayerList.Add(Player2Info);
@@ -325,7 +341,7 @@ public class GameController : MonoBehaviour
     {
         PlayerStats();
 
-
+        //Debug.Log("CROWN TARGET - " + CrownTarget);
 
 
         Text7.GetComponent<Text>().text = PlayerList[0].Name;
@@ -455,14 +471,9 @@ public class GameController : MonoBehaviour
 
             WayToList.Owned = PointCheck.Owned;
             WayToList.OwnedBy = PointCheck.OwnedBy;
-            WayToList.Cost = PointCheck.Cost;
-            WayToList.PayAmount = PointCheck.PayAmount;
             WayToList.Ownable = PointCheck.Ownable;
-            WayToList.Splitter = PointCheck.Splitter;
-            WayToList.WayPointSplit = PointCheck.WayPointSplit;
-            WayToList.EndSplit = PointCheck.EndSplit;
-            WayToList.BackTrackNum = PointCheck.BackTrackNum;
-            WayToList.Blank = PointCheck.Blank;
+            WayToList.ChestActive = PointCheck.ChestActive;
+            WayToList.ChestSpace = PointCheck.ChestActive;
 
             classSaver.wayPointSaveList.Add(WayToList);
         }
@@ -478,7 +489,7 @@ public class GameController : MonoBehaviour
         playersave.P2Points = PlayerList[1].Coins;
         playersave.P2Crowns = PlayerList[1].Crowns;
 
-        Debug.Log(PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber);
+        //Debug.Log(PlayerList[0].PlayerObject.GetComponent<PlayerMovement>().WayPointNumber);
 
         if (PlayerAmount == 3 || PlayerAmount == 4)
         {
@@ -555,6 +566,9 @@ public class GameController : MonoBehaviour
         {
             WayPoint[i].GetComponent<WayPointChecker>().Owned = CrossGameInfo.wayPointSaveList[i].Owned;
             WayPoint[i].GetComponent<WayPointChecker>().OwnedBy = CrossGameInfo.wayPointSaveList[i].OwnedBy;
+            WayPoint[i].GetComponent<WayPointChecker>().Ownable = CrossGameInfo.wayPointSaveList[i].Ownable;
+            WayPoint[i].GetComponent<WayPointChecker>().ChestActive = CrossGameInfo.wayPointSaveList[i].ChestActive;
+            WayPoint[i].GetComponent<WayPointChecker>().ChestSpace = CrossGameInfo.wayPointSaveList[i].ChestSpace;
 
             if (WayPoint[i].GetComponent<WayPointChecker>().Owned = CrossGameInfo.wayPointSaveList[i].Owned == true)
             {
@@ -569,22 +583,22 @@ public class GameController : MonoBehaviour
     void PlayerStats()
     {
 
-        Player1Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = Player1Info.Crowns.ToString();
-        Player1Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = Player1Info.Coins.ToString();
+        Player1Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = PlayerList[0].Crowns.ToString();
+        Player1Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = PlayerList[0].Coins.ToString();
 
-        Player2Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = Player2Info.Crowns.ToString();
-        Player2Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = Player2Info.Coins.ToString();
+        Player2Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = PlayerList[1].Crowns.ToString();
+        Player2Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = PlayerList[1].Coins.ToString();
 
         if (PlayerAmount == 3 || PlayerAmount == 4)
         {
-            Player3Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = Player3Info.Crowns.ToString();
-            Player3Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = Player3Info.Coins.ToString();
+            Player3Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = PlayerList[2].Crowns.ToString();
+            Player3Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = PlayerList[2].Coins.ToString();
         }
 
         if (PlayerAmount == 4)
         {
-            Player4Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = Player4Info.Crowns.ToString();
-            Player4Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = Player4Info.Coins.ToString();
+            Player4Info.RollOrder.transform.GetChild(1).GetComponent<Text>().text = PlayerList[3].Crowns.ToString();
+            Player4Info.RollOrder.transform.GetChild(2).GetComponent<Text>().text = PlayerList[3].Coins.ToString();
         }
     }
 
@@ -635,5 +649,46 @@ public class GameController : MonoBehaviour
 
 
         //Sort Camera Out? to New Top Player?
+    }
+
+    public void CheckCrowns()
+    {
+        for (int i = 0; i < PlayerAmount; i++)
+        {
+            if (PlayerList[i].Crowns == CrownTarget)
+            {
+                Debug.Log("WINNER WINNER CHICKEN DINNER");
+            }
+        }
+    }
+
+    void GenerateFirstChest()
+    {
+        
+        int NewRan = Random.Range(0, 6);
+        Debug.Log("NEW CHEST IS " + NewRan);
+        WayPoint[SplitterControler.GetComponent<SplitterControl>().Chests[NewRan]].GetComponent<WayPointChecker>().ChestActive = true;
+        WayPoint[SplitterControler.GetComponent<SplitterControl>().Chests[NewRan]].GetComponent<WayPointChecker>().UpdateChestImage();
+
+        SceneSwitcher.GetComponent<SceneSwitcher>().LastChestLocation = NewRan;
+    }
+
+    public void UpdateChest()
+    {
+        int NewRan = Random.Range(0, 6);
+        int OldRan = SceneSwitcher.GetComponent<SceneSwitcher>().LastChestLocation;
+
+        if (NewRan == OldRan)
+        {
+            UpdateChest();
+        }
+        else
+        {
+            WayPoint[SplitterControler.GetComponent<SplitterControl>().Chests[NewRan]].GetComponent<WayPointChecker>().ChestActive = true;
+            WayPoint[SplitterControler.GetComponent<SplitterControl>().Chests[NewRan]].GetComponent<WayPointChecker>().UpdateChestImage();
+
+            SceneSwitcher.GetComponent<SceneSwitcher>().LastChestLocation = NewRan;
+        }
+
     }
 }

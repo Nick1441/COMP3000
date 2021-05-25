@@ -12,6 +12,8 @@ public class SceneSwitcher : MonoBehaviour
     public int Third = 0;
     public int Fourth = 0;
 
+    public int LastChestLocation;
+
     void Start()
     {
         DontDestroyOnLoad(this);

@@ -32,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     public OnBuyEvent onBuy;
 
     public bool Buying = false;
+    public bool Opening = false;
+    public bool OpeningError = false;
+    public GameObject OpenChestComplete;
 
     bool FirstTImeSetup = true;
 
@@ -50,6 +53,9 @@ public class PlayerMovement : MonoBehaviour
     GameObject gameController;
     public bool test;
     bool EndSplitter = false;
+
+    public GameObject OpenChestMenu;
+    public GameObject OpenChestError;
 
     GameObject SendToPlayer;
     void Start()
@@ -70,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(test);
+        //Debug.Log(test);
         if ((BuyPoint != null) && (BuyText != null) && FirstTImeSetup)
         {
             BuyPoint.SetActive(false);
@@ -104,6 +110,24 @@ public class PlayerMovement : MonoBehaviour
             Splitting = false;
             SpillterExit(1);
             SplitterText.SetActive(false);
+        }
+
+        //Skip Buyinh
+        if (Opening && Input.GetKeyDown(KeyCode.A))
+        {
+            Opening = false;
+            OpenChest(1);
+        }
+        //Buy
+        if (Opening && Input.GetKeyDown(KeyCode.D))
+        {
+            Opening = false;
+            OpenChest(2);
+        }
+        if (OpeningError && Input.GetKeyDown(KeyCode.Space))
+        {
+            OpeningError = false;
+            OpenChest(3);
         }
     }
 
@@ -173,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
                 //Space is Free to Be Owned.
                 else if ((Owned == false) && (Ownable == true))
                 {
-                    Debug.Log("TRAP FREE");
+                    //Debug.Log("TRAP FREE");
                     TrapFree();
                 }
 
@@ -198,6 +222,8 @@ public class PlayerMovement : MonoBehaviour
     {
         bool isSplitter = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter;
         bool isSplitterEnd = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().EndSplit;
+        bool isChest = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().ChestSpace;
+        bool isChestActive = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().ChestActive;
 
         if ((isSplitter == true) && (isSplitterEnd == false))
         {
@@ -207,6 +233,11 @@ public class PlayerMovement : MonoBehaviour
         if ((isSplitter == true) && (isSplitterEnd == true))
         {
             SplitterEnd();
+        }
+
+        if ((isChest == true) && (isChestActive == true))
+        {
+            ChestOpener();
         }
     }
 
@@ -331,4 +362,61 @@ public class PlayerMovement : MonoBehaviour
 
         WayPointNumber = NewWay;
     }
+
+    void ChestOpener()
+    {
+        TempMove = NumToMove;
+        NumToMove = -1;
+
+        if (gameController.GetComponent<GameController>().PlayerList[PlayerNumber - 1].Coins >= 25)
+        {
+            //Ask if want to Buy!
+            Opening = true;
+            OpenChestMenu.SetActive(true);
+        }
+        else
+        {
+            //Say Cant Afford it! Then Press Space to Move on!
+            OpeningError = true;
+            OpenChestError.SetActive(true);
+        }
+    }
+    void OpenChest(int num)
+    {
+        // 1 - Skip
+        // 2 - Open
+        // 3 - Not Enough Points
+
+        if (num == 1)
+        {
+            NumToMove = TempMove;
+            OpenChestMenu.SetActive(false);
+
+        }
+        else if (num == 2)
+        {
+            Debug.Log("CHEST OPENED");
+            OpenChestMenu.SetActive(false);
+            OpenChestComplete.SetActive(true);
+
+            gameController.GetComponent<GameController>().PlayerList[PlayerNumber - 1].Crowns++;
+            gameController.GetComponent<GameController>().PlayerList[PlayerNumber - 1].Coins -= 25;
+            WayPoint[WayPointNumber].GetComponent<WayPointChecker>().ChestActive = false;
+            WayPoint[WayPointNumber].GetComponent<WayPointChecker>().HideChest();
+
+            //Check to see if someone has won. Reset Chest Into another Location
+            gameController.GetComponent<GameController>().CheckCrowns();
+            gameController.GetComponent<GameController>().UpdateChest();
+
+            OpeningError = true;
+        }
+        else if (num == 3)
+        {
+            NumToMove = TempMove;
+            OpenChestError.SetActive(false);
+            OpenChestComplete.SetActive(false);
+        }
+
+    }
+
 }

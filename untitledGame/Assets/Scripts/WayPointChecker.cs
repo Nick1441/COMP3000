@@ -8,6 +8,7 @@ public class WayPointChecker : MonoBehaviour
     public bool Ownable = false;
     public bool Splitter = false;
     public bool Blank = false;
+    public bool ChestSpace = false;
 
     [Space]
     [Header("Trap Variables")]
@@ -24,6 +25,7 @@ public class WayPointChecker : MonoBehaviour
     [Space]
     [Header("OTHER")]
     public int BackTrackNum = 0;
+    public bool ChestActive;
 
     [Header("Materials")]
     public Material mat1;
@@ -53,5 +55,15 @@ public class WayPointChecker : MonoBehaviour
         }
 
         this.transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>().material = NewMat;
+    }
+
+    public void UpdateChestImage()
+    {
+        this.transform.GetChild(1).transform.gameObject.SetActive(true);
+    }
+
+    public void HideChest()
+    {
+        this.transform.GetChild(1).transform.gameObject.SetActive(false);
     }
 }

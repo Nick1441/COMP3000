@@ -237,14 +237,14 @@ RectTransform:
   m_GameObject: {fileID: 10126054}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.969397, y: 7.969397, z: 7.969397}
   m_Children: []
   m_Father: {fileID: 932699119}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.9, y: -2.2}
+  m_AnchoredPosition: {x: -27, y: -27}
   m_SizeDelta: {x: 23.643799, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &10126056
@@ -294,6 +294,99 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 44348179}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &16292273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 16292274}
+  - component: {fileID: 16292277}
+  - component: {fileID: 16292276}
+  - component: {fileID: 16292275}
+  m_Layer: 0
+  m_Name: Chest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &16292274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16292273}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.57, y: -2.03, z: 0}
+  m_LocalScale: {x: 6.514, y: 6.514, z: 6.514}
+  m_Children: []
+  m_Father: {fileID: 135218723}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &16292275
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16292273}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &16292276
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16292273}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 77716d48601251e4f81a09ce10caf5ff, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &16292277
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16292273}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &17642158 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e90a70a3a94849f448e81c3181326f2d,
@@ -369,6 +462,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Buying: 0
+  Opening: 1
+  OpeningError: 0
+  OpenChestComplete: {fileID: 0}
   mat1: {fileID: 0}
   mat2: {fileID: 0}
   mat3: {fileID: 0}
@@ -376,6 +472,8 @@ MonoBehaviour:
   SplitterText: {fileID: 0}
   SplitterNumber: 0
   test: 0
+  OpenChestMenu: {fileID: 0}
+  OpenChestError: {fileID: 0}
 --- !u!136 &21869224
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -915,6 +1013,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -922,6 +1021,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -1203,6 +1303,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 1
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -1210,6 +1311,7 @@ MonoBehaviour:
   WayPointSplit: 1
   EndSplit: 1
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -1450,6 +1552,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -1457,10 +1560,48 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
   mat4: {fileID: 2100000, guid: fe35ff90f5e09cc4d98d9cdc956a7f09, type: 2}
+--- !u!1 &111533801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 111533802}
+  m_Layer: 5
+  m_Name: ChestInfoNot Enough Points
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &111533802
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111533801}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1999306149}
+  - {fileID: 917152404}
+  m_Father: {fileID: 1492300556}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &119383169 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e90a70a3a94849f448e81c3181326f2d,
@@ -1494,14 +1635,14 @@ RectTransform:
   m_GameObject: {fileID: 125576281}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.9693975, y: 7.9693975, z: 7.9693975}
   m_Children: []
   m_Father: {fileID: 1580453135}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -46.159973, y: -1.5000163}
+  m_AnchoredPosition: {x: -452, y: -16}
   m_SizeDelta: {x: 23.643799, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &125576283
@@ -1606,6 +1747,7 @@ Transform:
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_Children:
   - {fileID: 1265070780}
+  - {fileID: 16292274}
   m_Father: {fileID: 1997642407}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1623,7 +1765,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ownable: 0
   Splitter: 0
-  Blank: 1
+  Blank: 0
+  ChestSpace: 1
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -1631,6 +1774,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -2293,6 +2437,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -2300,6 +2445,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -2744,6 +2890,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -2751,6 +2898,7 @@ MonoBehaviour:
   WayPointSplit: 1
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -2909,16 +3057,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 298779109}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10.804938, y: 10.804938, z: 10.804938}
   m_Children: []
   m_Father: {fileID: 398088813}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 136.1, y: -0.0000088215}
+  m_AnchoredPosition: {x: 1690.8162, y: -19.103027}
   m_SizeDelta: {x: 23.643799, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &298779111
@@ -3182,6 +3330,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -3189,6 +3338,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -3498,6 +3648,7 @@ MonoBehaviour:
   SplitterEndLocation2: 19
   SplitterLocation3: 0
   SplitterEndLocation3: 1
+  Chests: 0200000008000000170000001b00000011000000
 --- !u!4 &345377380
 Transform:
   m_ObjectHideFlags: 0
@@ -3879,6 +4030,7 @@ Transform:
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_Children:
   - {fileID: 1167905704}
+  - {fileID: 942098491}
   m_Father: {fileID: 1997642407}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3896,7 +4048,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ownable: 0
   Splitter: 0
-  Blank: 1
+  Blank: 0
+  ChestSpace: 1
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -3904,6 +4057,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -3983,7 +4137,7 @@ RectTransform:
   m_GameObject: {fileID: 398088812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.12548, y: 0.12548, z: 0.12548}
   m_Children:
   - {fileID: 1507564584}
   - {fileID: 1900456743}
@@ -3994,8 +4148,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -40.25, y: 40}
-  m_SizeDelta: {x: 243.33203, y: 35.523186}
+  m_AnchoredPosition: {x: 0.000051975, y: 40}
+  m_SizeDelta: {x: 2466.1572, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &398088814
 MonoBehaviour:
@@ -4010,13 +4164,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.5803922, b: 0.21176471, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: 79599ae4719e1184f93415f2eb4551d7, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -4194,6 +4348,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -4201,6 +4356,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -4278,15 +4434,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434112910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 7.9693975, y: 7.9693975, z: 7.9693975}
   m_Children: []
   m_Father: {fileID: 1580453135}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 133.6, y: 2.1}
+  m_AnchoredPosition: {x: 980.5791, y: 12.690727}
   m_SizeDelta: {x: 23.643799, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &434112912
@@ -4474,6 +4630,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -4481,6 +4638,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -4723,6 +4881,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -4730,6 +4889,7 @@ MonoBehaviour:
   WayPointSplit: 1
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -5023,6 +5183,87 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490688242}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &500779444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 500779445}
+  - component: {fileID: 500779447}
+  - component: {fileID: 500779446}
+  m_Layer: 5
+  m_Name: Yes Buy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &500779445
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500779444}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1016477229}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2.5, y: -119.6}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &500779446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500779444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.8593202, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Press Space to Continue
+
+
+'
+--- !u!222 &500779447
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500779444}
+  m_CullTransparentMesh: 0
 --- !u!1 &503690582
 GameObject:
   m_ObjectHideFlags: 0
@@ -5426,6 +5667,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -5433,6 +5675,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -5464,14 +5707,14 @@ RectTransform:
   m_GameObject: {fileID: 539812056}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.9693975, y: 7.9693975, z: 7.9693975}
   m_Children: []
   m_Father: {fileID: 761000871}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 133.67802, y: 1.7000694}
+  m_AnchoredPosition: {x: 959.22986, y: 21.239899}
   m_SizeDelta: {x: 23.643799, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &539812058
@@ -5934,6 +6177,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 1
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -5941,6 +6185,7 @@ MonoBehaviour:
   WayPointSplit: 2
   EndSplit: 1
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -6125,6 +6370,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -6132,6 +6378,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -6372,6 +6619,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -6379,6 +6627,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -6521,6 +6770,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -6528,6 +6778,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -6628,6 +6879,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -6635,6 +6887,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -6898,6 +7151,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -6905,6 +7159,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -6989,6 +7244,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633722019}
   m_CullTransparentMesh: 0
+--- !u!1 &636962198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 636962199}
+  - component: {fileID: 636962201}
+  - component: {fileID: 636962200}
+  m_Layer: 5
+  m_Name: No Buy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &636962199
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636962198}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1140541063}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -90.50003, y: -134.80002}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &636962200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636962198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Press "A" To Skip
+
+'
+--- !u!222 &636962201
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636962198}
+  m_CullTransparentMesh: 0
 --- !u!1 &645568105
 GameObject:
   m_ObjectHideFlags: 0
@@ -7044,16 +7379,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645704140}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10.804938, y: 10.804938, z: 10.804938}
   m_Children: []
   m_Father: {fileID: 398088813}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.822, y: -3.6}
+  m_AnchoredPosition: {x: 348, y: -58}
   m_SizeDelta: {x: 23.643799, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &645704142
@@ -7430,6 +7765,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 1
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -7437,6 +7773,7 @@ MonoBehaviour:
   WayPointSplit: 2
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -7691,6 +8028,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Buying: 0
+  Opening: 0
+  OpeningError: 0
+  OpenChestComplete: {fileID: 1016477228}
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -7698,6 +8038,8 @@ MonoBehaviour:
   SplitterText: {fileID: 211983318}
   SplitterNumber: 0
   test: 0
+  OpenChestMenu: {fileID: 1140541062}
+  OpenChestError: {fileID: 111533801}
 --- !u!65 &681225326
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7869,6 +8211,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -7876,6 +8219,7 @@ MonoBehaviour:
   WayPointSplit: 1
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -7929,6 +8273,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -7936,6 +8281,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -8570,6 +8916,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &711324757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 711324758}
+  - component: {fileID: 711324760}
+  - component: {fileID: 711324759}
+  m_Layer: 5
+  m_Name: Yes Buy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &711324758
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711324757}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1140541063}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 103.80005, y: -133.80002}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &711324759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711324757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Press "D" To Buy
+
+'
+--- !u!222 &711324760
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711324757}
+  m_CullTransparentMesh: 0
 --- !u!1 &714193845
 GameObject:
   m_ObjectHideFlags: 0
@@ -8906,6 +9332,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Buying: 0
+  Opening: 0
+  OpeningError: 0
+  OpenChestComplete: {fileID: 1016477228}
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -8913,6 +9342,8 @@ MonoBehaviour:
   SplitterText: {fileID: 211983318}
   SplitterNumber: 0
   test: 0
+  OpenChestMenu: {fileID: 1140541062}
+  OpenChestError: {fileID: 111533801}
 --- !u!65 &736609764
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9013,16 +9444,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 739994463}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.969397, y: 7.969397, z: 7.969397}
   m_Children: []
   m_Father: {fileID: 932699119}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -36, y: -3.6}
+  m_AnchoredPosition: {x: -384.82538, y: -38.1577}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &739994465
@@ -9281,6 +9712,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -9288,6 +9720,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -9451,7 +9884,7 @@ RectTransform:
   m_GameObject: {fileID: 761000870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.12548, y: 0.12548, z: 0.12548}
   m_Children:
   - {fileID: 1575836189}
   - {fileID: 1910645633}
@@ -9462,8 +9895,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -40.25, y: -40}
-  m_SizeDelta: {x: 243.33203, y: 35.523186}
+  m_AnchoredPosition: {x: 0.000051975, y: -60}
+  m_SizeDelta: {x: 2466.1572, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &761000872
 Animator:
@@ -9497,13 +9930,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.69411767, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: 32e30e24844a28a4d8f76a1213c670ef, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -9651,6 +10084,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -9658,6 +10092,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -9989,6 +10424,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -9996,6 +10432,7 @@ MonoBehaviour:
   WayPointSplit: 1
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -10230,6 +10667,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 1
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -10237,6 +10675,7 @@ MonoBehaviour:
   WayPointSplit: 3
   EndSplit: 1
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -10406,7 +10845,7 @@ RectTransform:
   m_GameObject: {fileID: 820384084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.58920395, y: 0.58920395, z: 0.58920395}
+  m_LocalScale: {x: 0.43457916, y: 0.43457916, z: 0.43457916}
   m_Children:
   - {fileID: 1955729689}
   - {fileID: 398088813}
@@ -10418,7 +10857,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 98.84, y: -48}
+  m_AnchoredPosition: {x: 70.9, y: -34.3}
   m_SizeDelta: {x: 309.45334, y: 195.62897}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &827516094
@@ -10652,6 +11091,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 0
@@ -10659,6 +11099,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 0}
   mat2: {fileID: 0}
   mat3: {fileID: 0}
@@ -11080,6 +11521,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -11087,6 +11529,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -11450,6 +11893,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -11457,6 +11901,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -11581,14 +12026,14 @@ RectTransform:
   m_GameObject: {fileID: 910411908}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.9693975, y: 7.9693975, z: 7.9693975}
   m_Children: []
   m_Father: {fileID: 1580453135}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.322036, y: -1.5000163}
+  m_AnchoredPosition: {x: -9.840942, y: -16.0001}
   m_SizeDelta: {x: 23.643799, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910411910
@@ -11710,6 +12155,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914923447}
   m_CullTransparentMesh: 0
+--- !u!1 &917152403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 917152404}
+  - component: {fileID: 917152406}
+  - component: {fileID: 917152405}
+  m_Layer: 5
+  m_Name: Yes Buy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &917152404
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917152403}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 111533802}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2.5, y: -119.6}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &917152405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917152403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Press Space to Continue
+
+
+'
+--- !u!222 &917152406
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917152403}
+  m_CullTransparentMesh: 0
 --- !u!1 &920682385
 GameObject:
   m_ObjectHideFlags: 0
@@ -11806,6 +12332,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -11813,6 +12340,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -11845,7 +12373,7 @@ RectTransform:
   m_GameObject: {fileID: 932699118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.12548, y: 0.12548, z: 0.12548}
   m_Children:
   - {fileID: 739994464}
   - {fileID: 981614681}
@@ -11856,8 +12384,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -40.25, y: -80}
-  m_SizeDelta: {x: 243.33203, y: 35.523186}
+  m_AnchoredPosition: {x: 0.000051975, y: -110}
+  m_SizeDelta: {x: 2466.1572, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &932699120
 Animator:
@@ -11891,13 +12419,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.93333334, g: 0.23529412, b: 0.37254903, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: e7b125cf555cf8b4db326d0012d88032, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -11961,6 +12489,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -11968,6 +12497,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -12019,6 +12549,99 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &942098490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 942098491}
+  - component: {fileID: 942098494}
+  - component: {fileID: 942098493}
+  - component: {fileID: 942098492}
+  m_Layer: 0
+  m_Name: Chest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &942098491
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942098490}
+  m_LocalRotation: {x: -0, y: 0.2653396, z: -0, w: 0.964155}
+  m_LocalPosition: {x: 7.5599966, y: -2.32, z: 7.9500017}
+  m_LocalScale: {x: 6.5140004, y: 6.5140004, z: 6.5140004}
+  m_Children: []
+  m_Father: {fileID: 385695955}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 30.774002, z: 0}
+--- !u!65 &942098492
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942098490}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &942098493
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942098490}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 77716d48601251e4f81a09ce10caf5ff, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &942098494
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942098490}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &952412453
 GameObject:
   m_ObjectHideFlags: 0
@@ -12435,6 +13058,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Buying: 0
+  Opening: 0
+  OpeningError: 0
+  OpenChestComplete: {fileID: 1016477228}
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -12442,6 +13068,8 @@ MonoBehaviour:
   SplitterText: {fileID: 211983318}
   SplitterNumber: 0
   test: 0
+  OpenChestMenu: {fileID: 1140541062}
+  OpenChestError: {fileID: 111533801}
 --- !u!65 &979867971
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12622,14 +13250,14 @@ RectTransform:
   m_GameObject: {fileID: 981614680}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.969397, y: 7.969397, z: 7.969397}
   m_Children: []
   m_Father: {fileID: 932699119}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -46.58196, y: -2.1999817}
+  m_AnchoredPosition: {x: -469.15674, y: -27.000137}
   m_SizeDelta: {x: 23.643799, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &981614682
@@ -12766,6 +13394,43 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013363648}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1016477228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1016477229}
+  m_Layer: 5
+  m_Name: ChestOpened
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1016477229
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016477228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1975848635}
+  - {fileID: 500779445}
+  m_Father: {fileID: 1492300556}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1020891450
 GameObject:
   m_ObjectHideFlags: 0
@@ -12895,6 +13560,84 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026450360}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1037118416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1037118417}
+  - component: {fileID: 1037118419}
+  - component: {fileID: 1037118418}
+  m_Layer: 5
+  m_Name: ChestBuying
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1037118417
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037118416}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1140541063}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -80}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1037118418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037118416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Buy Chest for 25 Coins?
+--- !u!222 &1037118419
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037118416}
+  m_CullTransparentMesh: 0
 --- !u!4 &1044385667 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e90a70a3a94849f448e81c3181326f2d,
@@ -13084,6 +13827,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Buying: 0
+  Opening: 0
+  OpeningError: 0
+  OpenChestComplete: {fileID: 1016477228}
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -13091,6 +13837,8 @@ MonoBehaviour:
   SplitterText: {fileID: 211983318}
   SplitterNumber: 0
   test: 0
+  OpenChestMenu: {fileID: 1140541062}
+  OpenChestError: {fileID: 111533801}
 --- !u!1 &1084258482
 GameObject:
   m_ObjectHideFlags: 0
@@ -13218,6 +13966,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -13225,6 +13974,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -13754,6 +14504,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -13761,6 +14512,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -13890,6 +14642,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130961579}
   m_CullTransparentMesh: 0
+--- !u!1 &1140541062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1140541063}
+  m_Layer: 5
+  m_Name: ChestInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1140541063
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140541062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1037118417}
+  - {fileID: 636962199}
+  - {fileID: 711324758}
+  m_Father: {fileID: 1492300556}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1153488197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14026,6 +14816,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 0
@@ -14033,6 +14824,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 0}
   mat2: {fileID: 0}
   mat3: {fileID: 0}
@@ -14266,6 +15058,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -14273,6 +15066,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -14420,6 +15214,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -14427,6 +15222,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -14544,6 +15340,99 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1190046042}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1218344136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1218344137}
+  - component: {fileID: 1218344140}
+  - component: {fileID: 1218344139}
+  - component: {fileID: 1218344138}
+  m_Layer: 0
+  m_Name: Chest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1218344137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218344136}
+  m_LocalRotation: {x: -0, y: -0.016348932, z: -0, w: 0.99986637}
+  m_LocalPosition: {x: 0.19999982, y: -0.41000012, z: 10.319997}
+  m_LocalScale: {x: 6.514001, y: 6.514001, z: 6.514001}
+  m_Children: []
+  m_Father: {fileID: 1808020550}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: -1.8740001, z: 0}
+--- !u!65 &1218344138
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218344136}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1218344139
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218344136}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 77716d48601251e4f81a09ce10caf5ff, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1218344140
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218344136}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1240255456
 GameObject:
   m_ObjectHideFlags: 0
@@ -14571,14 +15460,14 @@ RectTransform:
   m_GameObject: {fileID: 1240255456}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.969397, y: 7.969397, z: 7.969397}
   m_Children: []
   m_Father: {fileID: 932699119}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 133.17802, y: 1.4000549}
+  m_AnchoredPosition: {x: 963.42224, y: 1.6895905}
   m_SizeDelta: {x: 23.643799, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1240255458
@@ -14890,6 +15779,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -14897,6 +15787,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -15073,6 +15964,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 1
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -15080,6 +15972,7 @@ MonoBehaviour:
   WayPointSplit: 1
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -15240,6 +16133,7 @@ Transform:
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_Children:
   - {fileID: 1352980119}
+  - {fileID: 1964472267}
   m_Father: {fileID: 1997642407}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15257,7 +16151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ownable: 0
   Splitter: 0
-  Blank: 1
+  Blank: 0
+  ChestSpace: 1
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -15265,6 +16160,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -15848,6 +16744,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -15855,6 +16752,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -15908,6 +16806,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -15915,6 +16814,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -16789,6 +17689,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -16796,6 +17697,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -17769,6 +18671,9 @@ RectTransform:
   - {fileID: 1258203884}
   - {fileID: 1494319836}
   - {fileID: 178634146}
+  - {fileID: 1140541063}
+  - {fileID: 111533802}
+  - {fileID: 1016477229}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17973,16 +18878,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498890934}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.9693975, y: 7.9693975, z: 7.9693975}
   m_Children: []
   m_Father: {fileID: 1580453135}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35.999943, y: -3.599991}
+  m_AnchoredPosition: {x: -371.0301, y: -32.735374}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1498890936
@@ -18124,6 +19029,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -18131,6 +19037,7 @@ MonoBehaviour:
   WayPointSplit: 1
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -18160,16 +19067,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507564583}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10.804938, y: 10.804938, z: 10.804938}
   m_Children: []
   m_Father: {fileID: 398088813}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35.999943, y: -3.599991}
+  m_AnchoredPosition: {x: -168.71135, y: -58.00049}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1507564585
@@ -19211,16 +20118,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575836188}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.9693975, y: 7.9693975, z: 7.9693975}
   m_Children: []
   m_Father: {fileID: 761000871}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35.999943, y: -3.599991}
+  m_AnchoredPosition: {x: -393, y: -21}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1575836190
@@ -19315,6 +20222,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -19322,6 +20230,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -19401,7 +20310,7 @@ RectTransform:
   m_GameObject: {fileID: 1580453134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.12548, y: 0.12548, z: 0.12548}
   m_Children:
   - {fileID: 1498890935}
   - {fileID: 125576282}
@@ -19412,8 +20321,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -40.25, y: 0}
-  m_SizeDelta: {x: 243.33203, y: 35.523186}
+  m_AnchoredPosition: {x: 0.000051975, y: -10}
+  m_SizeDelta: {x: 2466.1572, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1580453136
 Animator:
@@ -19447,13 +20356,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.21176471, b: 0.62352943, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: eeaf806426e10ab4daa901a391910a85, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -19570,6 +20479,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -19577,6 +20487,7 @@ MonoBehaviour:
   WayPointSplit: 1
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -19667,6 +20578,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -19674,6 +20586,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -19983,6 +20896,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Buying: 0
+  Opening: 1
+  OpeningError: 0
+  OpenChestComplete: {fileID: 0}
   mat1: {fileID: 0}
   mat2: {fileID: 0}
   mat3: {fileID: 0}
@@ -19990,6 +20906,8 @@ MonoBehaviour:
   SplitterText: {fileID: 0}
   SplitterNumber: 0
   test: 0
+  OpenChestMenu: {fileID: 0}
+  OpenChestError: {fileID: 0}
 --- !u!65 &1633805079
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20188,6 +21106,7 @@ Transform:
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_Children:
   - {fileID: 447292661}
+  - {fileID: 1837572975}
   m_Father: {fileID: 1997642407}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20205,7 +21124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ownable: 0
   Splitter: 0
-  Blank: 1
+  Blank: 0
+  ChestSpace: 1
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -20213,6 +21133,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -20313,6 +21234,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -20320,6 +21242,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -20560,6 +21483,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -20567,6 +21491,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -20710,18 +21635,7 @@ MonoBehaviour:
         m_CallState: 2
   SwitchOnce:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 552324531}
-        m_MethodName: Switch
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   CamChange:
     m_PersistentCalls:
       m_Calls:
@@ -20751,6 +21665,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   PlayerAmount: 0
+  CrownTarget: 1
   RollButton: {fileID: 1976502950}
   DiceRollingImage: {fileID: 2108473434}
   PlayerRollOrderImage: {fileID: 820384084}
@@ -20772,10 +21687,10 @@ MonoBehaviour:
   RollLoopAfterBool: 0
   Movable: 1
   IgnorePlacements: 1
-  Player1Coins: 0
-  Player2Coins: 0
-  Player3Coins: 0
-  Player4Coins: 0
+  Player1Coins: 50
+  Player2Coins: 10
+  Player3Coins: 10
+  Player4Coins: 10
   Text1: {fileID: 1434838441}
   Text2: {fileID: 1365332538}
   Text3: {fileID: 714193845}
@@ -20820,6 +21735,7 @@ MonoBehaviour:
   - {fileID: 1124874734}
   - {fileID: 573893823}
   Camera: {fileID: 0}
+  SplitterControler: {fileID: 345377378}
 --- !u!4 &1690806171
 Transform:
   m_ObjectHideFlags: 0
@@ -21032,6 +21948,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -21039,6 +21956,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -21549,6 +22467,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -21556,6 +22475,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -21687,6 +22607,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -21694,6 +22615,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -21919,6 +22841,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -21926,6 +22849,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -22045,6 +22969,7 @@ Transform:
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_Children:
   - {fileID: 692924881}
+  - {fileID: 1218344137}
   m_Father: {fileID: 1997642407}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22062,7 +22987,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ownable: 0
   Splitter: 0
-  Blank: 1
+  Blank: 0
+  ChestSpace: 1
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -22070,6 +22996,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -22147,15 +23074,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814564607}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 7.9693975, y: 7.9693975, z: 7.9693975}
   m_Children: []
   m_Father: {fileID: 761000871}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.4, y: -1.9}
+  m_AnchoredPosition: {x: -31.190216, y: -7.4505615}
   m_SizeDelta: {x: 23.643799, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1814564609
@@ -22337,6 +23264,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -22344,6 +23272,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -22466,6 +23395,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836093595}
   m_CullTransparentMesh: 0
+--- !u!1 &1837572974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1837572975}
+  - component: {fileID: 1837572978}
+  - component: {fileID: 1837572977}
+  - component: {fileID: 1837572976}
+  m_Layer: 0
+  m_Name: Chest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1837572975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837572974}
+  m_LocalRotation: {x: -0, y: 0.19751704, z: -0, w: 0.98029953}
+  m_LocalPosition: {x: -10.530001, y: -1.36, z: 5}
+  m_LocalScale: {x: 6.5140004, y: 6.5140004, z: 6.5140004}
+  m_Children: []
+  m_Father: {fileID: 1650284568}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 22.784, z: 0}
+--- !u!65 &1837572976
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837572974}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1837572977
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837572974}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 77716d48601251e4f81a09ce10caf5ff, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1837572978
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837572974}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1846539302
 GameObject:
   m_ObjectHideFlags: 0
@@ -22773,16 +23795,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900456742}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10.804938, y: 10.804938, z: 10.804938}
   m_Children: []
   m_Father: {fileID: 398088813}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -43.66, y: -3.6}
+  m_AnchoredPosition: {x: -251.47765, y: -58.00049}
   m_SizeDelta: {x: 23.643799, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1900456744
@@ -22952,6 +23974,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -22959,6 +23982,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -22990,14 +24014,14 @@ RectTransform:
   m_GameObject: {fileID: 1910645632}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.9693975, y: 7.9693975, z: 7.9693975}
   m_Children: []
   m_Father: {fileID: 761000871}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -46.081955, y: -1.9000015}
+  m_AnchoredPosition: {x: -473.34778, y: -7.4505615}
   m_SizeDelta: {x: 23.643799, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1910645634
@@ -23563,6 +24587,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -23570,6 +24595,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -23788,6 +24814,99 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1964472266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1964472267}
+  - component: {fileID: 1964472270}
+  - component: {fileID: 1964472269}
+  - component: {fileID: 1964472268}
+  m_Layer: 0
+  m_Name: Chest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1964472267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964472266}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.09, y: -1.79, z: 10.5}
+  m_LocalScale: {x: 6.5140004, y: 6.5140004, z: 6.5140004}
+  m_Children: []
+  m_Father: {fileID: 1350435840}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1964472268
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964472266}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1964472269
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964472266}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 77716d48601251e4f81a09ce10caf5ff, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1964472270
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964472266}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1971717318 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e90a70a3a94849f448e81c3181326f2d,
@@ -23883,6 +25002,84 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e90a70a3a94849f448e81c3181326f2d, type: 3}
+--- !u!1 &1975848634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1975848635}
+  - component: {fileID: 1975848637}
+  - component: {fileID: 1975848636}
+  m_Layer: 5
+  m_Name: ChestBuying
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1975848635
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975848634}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1016477229}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -80}
+  m_SizeDelta: {x: 245.98285, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1975848636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975848634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.8595643, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Chest Opened
+--- !u!222 &1975848637
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975848634}
+  m_CullTransparentMesh: 0
 --- !u!1 &1976502950
 GameObject:
   m_ObjectHideFlags: 0
@@ -24204,6 +25401,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -24211,6 +25409,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -24279,6 +25478,84 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1999306148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1999306149}
+  - component: {fileID: 1999306151}
+  - component: {fileID: 1999306150}
+  m_Layer: 5
+  m_Name: ChestBuying
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1999306149
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999306148}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 111533802}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -80}
+  m_SizeDelta: {x: 245.98285, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1999306150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999306148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: You Do Not Own Enough Points!
+--- !u!222 &1999306151
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999306148}
+  m_CullTransparentMesh: 0
 --- !u!1 &2005039603
 GameObject:
   m_ObjectHideFlags: 0
@@ -24328,6 +25605,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -24335,6 +25613,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}
@@ -25193,6 +26472,7 @@ MonoBehaviour:
   Ownable: 0
   Splitter: 0
   Blank: 1
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 0
@@ -25200,6 +26480,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 0}
   mat2: {fileID: 0}
   mat3: {fileID: 0}
@@ -25580,6 +26861,7 @@ MonoBehaviour:
   Ownable: 1
   Splitter: 0
   Blank: 0
+  ChestSpace: 0
   Owned: 0
   OwnedBy: 
   Cost: 10
@@ -25587,6 +26869,7 @@ MonoBehaviour:
   WayPointSplit: 0
   EndSplit: 0
   BackTrackNum: 0
+  ChestActive: 0
   mat1: {fileID: 2100000, guid: c52419e5b92f59c4a97c8994675fb3ca, type: 2}
   mat2: {fileID: 2100000, guid: 94dea2702bd9f044a9ddda9466d97ed3, type: 2}
   mat3: {fileID: 2100000, guid: f6f9d1bce7e675941bd8e66db549ac91, type: 2}

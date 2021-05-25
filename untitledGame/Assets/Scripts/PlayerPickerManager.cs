@@ -34,6 +34,10 @@ public class PlayerPickerManager : MonoBehaviour
     SavingLoading SaveLoad = new SavingLoading();
     string JsonPath;
 
+    public int Crowns = 1;
+    public Text CrownText;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +51,7 @@ public class PlayerPickerManager : MonoBehaviour
         Player4.SetActive(false);
 
         JsonPath = Application.persistentDataPath + "/saveload.json";
+        CrownText.text = Crowns.ToString();
     }
 
     //Tersting Purposes
@@ -124,6 +129,7 @@ public class PlayerPickerManager : MonoBehaviour
         SaveLoad.P3Name = SaveP3Name;
         SaveLoad.P4Name = SaveP4Name;
         SaveLoad.PCount = SavePCount;
+        SaveLoad.Crown = Crowns;
 
         string JSONDATA = JsonUtility.ToJson(SaveLoad, true);
         File.WriteAllText(JsonPath, JSONDATA);
@@ -177,6 +183,23 @@ public class PlayerPickerManager : MonoBehaviour
         Player4.SetActive(false);
     }
 
+    //Adding Crowns
+    public void AddCrown()
+    {
+        if (Crowns != 8)
+        {
+            Crowns++;
+            CrownText.text = Crowns.ToString();
+        }
+    }
 
+    public void MinusCrown()
+    {
+        if (Crowns != 1)
+        {
+            Crowns--;
+            CrownText.text = Crowns.ToString();
+        }
+    }
 
 }
