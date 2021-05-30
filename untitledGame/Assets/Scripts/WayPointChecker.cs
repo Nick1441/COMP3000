@@ -10,6 +10,11 @@ public class WayPointChecker : MonoBehaviour
     public bool Blank = false;
     public bool ChestSpace = false;
 
+    //New Items To Check For..
+    public bool Penalty = false;
+    public bool ExtraKeys = false;
+    public bool AdvanceSpaces = false;
+
     [Space]
     [Header("Trap Variables")]
     public bool Owned = false;
@@ -63,6 +68,12 @@ public class WayPointChecker : MonoBehaviour
     }
 
     public void HideChest()
+    {
+        this.transform.GetChild(1).transform.GetChild(1).transform.gameObject.GetComponent<Animator>().SetTrigger("Opened");
+        Invoke("HideCHestExit", 2.0f);
+    }
+
+    void HideCHestExit()
     {
         this.transform.GetChild(1).transform.gameObject.SetActive(false);
     }

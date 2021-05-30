@@ -20,6 +20,10 @@ public class PlayerMovement : MonoBehaviour
     public GameObject BuyPoint;
     public Text BuyText;
 
+    [Header("GUI's")]
+    public GameObject guiExtraKeys;
+    public GameObject guiLooseKeys;
+
     public int NumToMove = -1;
     public int TempMove = 0;
     public bool Moving = false;
@@ -188,6 +192,10 @@ public class PlayerMovement : MonoBehaviour
                 bool isSplitter = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Splitter;
                 bool isBlank = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Blank;
 
+                bool isPenalty = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().Penalty;
+                bool isExtra = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().ExtraKeys;
+                bool isAdvance = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().AdvanceSpaces;
+
                 //Space is Owned by A Player
                 if (Owned == true)
                 {
@@ -205,6 +213,24 @@ public class PlayerMovement : MonoBehaviour
                 else if (isBlank == true)
                 {
                     EndTurn();
+                }
+
+                //Space Advancement
+                else if (isAdvance == true)
+                {
+                    AdvanceSpaces();
+                }
+
+                //Extra Keys! Free
+                else if (isExtra == true)
+                {
+                    ExtraKeys();
+                }
+
+                //Take Keys Away! Not as many as Given!
+                else if (isPenalty == true)
+                {
+                    Penalty();
                 }
             }
         }
@@ -238,6 +264,14 @@ public class PlayerMovement : MonoBehaviour
         if ((isChest == true) && (isChestActive == true))
         {
             ChestOpener();
+        }
+
+        //THIS WILL NOT WORK
+        //Should check to see if this is last option?
+        if (NumToMove == 0 && transform.position == WayPoint[WayPointNumber].transform.position)
+        {
+            //    EndTurn();
+            Debug.Log("SHOULD ROLL NEXT TURN");
         }
     }
 
@@ -419,4 +453,51 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+
+    void Penalty()
+    {
+        //Enable GUI
+        //Diable Normal GUI
+        gameController.GetComponent<GameController>().PlayerList[PlayerNumber - 1].Coins -= 5;
+        guiLooseKeys.SetActive(true);
+
+        string PlayerName = gameController.GetComponent<GameController>().PlayerList[PlayerNumber - 1].PlayerObject.name;
+        guiLooseKeys.transform.GetChild(0).GetComponent<Text>().text = PlayerName + " Lost 5 Coins!";
+
+        Invoke("PenaltyCompelte", 4.0f);
+    }
+
+    void PenaltyCompelte()
+    {
+        guiLooseKeys.SetActive(false);
+        EndTurn();
+    }
+
+    void ExtraKeys()
+    {
+        gameController.GetComponent<GameController>().PlayerList[PlayerNumber - 1].Coins += 10;
+        guiLooseKeys.SetActive(true);
+
+        string PlayerName = gameController.GetComponent<GameController>().PlayerList[PlayerNumber - 1].PlayerObject.name;
+        guiLooseKeys.transform.GetChild(0).GetComponent<Text>().text = PlayerName + " Earnt 5 Coins!";
+
+        Invoke("PenaltyCompelte", 4.0f);
+    }
+
+    void AdvanceSpaces()
+    {
+        //Set the Items to Move i guess? Will move to a blank space.
+        NumToMove = 2;
+        guiLooseKeys.SetActive(true);
+
+        string PlayerName = gameController.GetComponent<GameController>().PlayerList[PlayerNumber - 1].PlayerObject.name;
+        guiLooseKeys.transform.GetChild(0).GetComponent<Text>().text = PlayerName + " Earnt 2 Extra Spaces!";
+
+        Invoke("AdvanceSpaceComplete", 2.0f);
+    }
+
+    void AdvanceSpaceComplete()
+    {
+        guiLooseKeys.SetActive(false);
+    }
 }

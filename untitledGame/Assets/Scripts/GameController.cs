@@ -570,7 +570,12 @@ public class GameController : MonoBehaviour
             WayPoint[i].GetComponent<WayPointChecker>().ChestActive = CrossGameInfo.wayPointSaveList[i].ChestActive;
             WayPoint[i].GetComponent<WayPointChecker>().ChestSpace = CrossGameInfo.wayPointSaveList[i].ChestSpace;
 
-            if (WayPoint[i].GetComponent<WayPointChecker>().Owned = CrossGameInfo.wayPointSaveList[i].Owned == true)
+            if (WayPoint[i].GetComponent<WayPointChecker>().ChestActive == true)
+            {
+                WayPoint[i].GetComponent<WayPointChecker>().UpdateChestImage();
+            }
+
+            if (WayPoint[i].GetComponent<WayPointChecker>().Owned == true)
             {
                 WayPoint[i].GetComponent<WayPointChecker>().UpdateColor();
             }
@@ -665,7 +670,7 @@ public class GameController : MonoBehaviour
     void GenerateFirstChest()
     {
         
-        int NewRan = Random.Range(0, 6);
+        int NewRan = Random.Range(0, 5);
         Debug.Log("NEW CHEST IS " + NewRan);
         WayPoint[SplitterControler.GetComponent<SplitterControl>().Chests[NewRan]].GetComponent<WayPointChecker>().ChestActive = true;
         WayPoint[SplitterControler.GetComponent<SplitterControl>().Chests[NewRan]].GetComponent<WayPointChecker>().UpdateChestImage();
@@ -675,7 +680,7 @@ public class GameController : MonoBehaviour
 
     public void UpdateChest()
     {
-        int NewRan = Random.Range(0, 6);
+        int NewRan = Random.Range(0, 5);
         int OldRan = SceneSwitcher.GetComponent<SceneSwitcher>().LastChestLocation;
 
         if (NewRan == OldRan)
