@@ -141,18 +141,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (transform.position != WayPoint[WayPointNumber].transform.position)
         {
-            var lookPos = WayPoint[WayPointNumber + 1].position - transform.position;
+            var lookPos = WayPoint[WayPointNumber].position - transform.position;
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
             transform.GetChild(1).rotation = Quaternion.Slerp(transform.GetChild(1).rotation, rotation, Time.deltaTime * 50.0f);
-
-
-
-            Moved = false;
-            transform.position = Vector3.MoveTowards(transform.position, WayPoint[WayPointNumber].transform.position, MoveSpeed * Time.deltaTime);
-
-            this.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Moving");
-
             if (MovementTime <= 1.0f)
             {
                 MovementTime += 0.02f;
@@ -160,11 +152,24 @@ public class PlayerMovement : MonoBehaviour
             }
 
             this.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<Animator>().SetFloat("Blend", MovementTime);
+
+
+            Moved = false;
+            transform.position = Vector3.MoveTowards(transform.position, WayPoint[WayPointNumber].transform.position, MoveSpeed * Time.deltaTime);
+
+            this.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Moving");
+
+            
         }
         else
         {
             Moved = true;
-            MovementTime = 0;
+
+            if (MovementTime >= 0.0f)
+            {
+                MovementTime -= 0.02f;
+
+            }
             this.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<Animator>().SetFloat("Blend", MovementTime);
             //Debug.Log("Moved");
         }
@@ -519,5 +524,15 @@ public class PlayerMovement : MonoBehaviour
     void AdvanceSpaceComplete()
     {
         guiLooseKeys.SetActive(false);
+    }
+
+    void StopMovement()
+    {
+
+    }
+
+    void StartMovement()
+    {
+
     }
 }
