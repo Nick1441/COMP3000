@@ -49,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
     public Material mat4;
     Material NewMat;
 
+
+    float MovementTime = 0;
     [Space]
     public GameObject SplitterText;
     bool Splitting = false;
@@ -139,17 +141,35 @@ public class PlayerMovement : MonoBehaviour
     {
         if (transform.position != WayPoint[WayPointNumber].transform.position)
         {
+            var lookPos = WayPoint[WayPointNumber + 1].position - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.GetChild(1).rotation = Quaternion.Slerp(transform.GetChild(1).rotation, rotation, Time.deltaTime * 50.0f);
+
+
+
             Moved = false;
             transform.position = Vector3.MoveTowards(transform.position, WayPoint[WayPointNumber].transform.position, MoveSpeed * Time.deltaTime);
-            //Debug.Log("Moving");
+
+            this.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Moving");
+
+            if (MovementTime <= 1.0f)
+            {
+                MovementTime += 0.02f;
+
+            }
+
+            this.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<Animator>().SetFloat("Blend", MovementTime);
         }
         else
         {
             Moved = true;
+            MovementTime = 0;
+            this.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<Animator>().SetFloat("Blend", MovementTime);
             //Debug.Log("Moved");
         }
     }
-
+    
     public int ReturnMoves()
     {
         return NumToMove;
