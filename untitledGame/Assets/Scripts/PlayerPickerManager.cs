@@ -37,7 +37,7 @@ public class PlayerPickerManager : MonoBehaviour
     public int Crowns = 1;
     public Text CrownText;
 
-
+    public GameObject sceneSwitcher;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +52,7 @@ public class PlayerPickerManager : MonoBehaviour
 
         JsonPath = Application.persistentDataPath + "/saveload.json";
         CrownText.text = Crowns.ToString();
+        sceneSwitcher = GameObject.FindGameObjectWithTag("SceneSwitcher");
     }
 
     //Tersting Purposes
@@ -87,6 +88,7 @@ public class PlayerPickerManager : MonoBehaviour
 
         //PlayerPrefs.SetInt("PCount", 2);
         SavePCount = 2;
+        sceneSwitcher.GetComponent<SceneSwitcher>().PlayerAmount = 2;
 
         if (Player3Bool)
         {
@@ -104,6 +106,7 @@ public class PlayerPickerManager : MonoBehaviour
             }
             //PlayerPrefs.SetInt("PCount", 3);
             SavePCount = 3;
+            sceneSwitcher.GetComponent<SceneSwitcher>().PlayerAmount = 3;
         }
         if (Player4Bool)
         {
@@ -122,6 +125,7 @@ public class PlayerPickerManager : MonoBehaviour
 
             //PlayerPrefs.SetInt("PCount", 4);
             SavePCount = 4;
+            sceneSwitcher.GetComponent<SceneSwitcher>().PlayerAmount = 4;
         }
 
         SaveLoad.P1Name = SaveP1Name;
@@ -134,6 +138,8 @@ public class PlayerPickerManager : MonoBehaviour
         string JSONDATA = JsonUtility.ToJson(SaveLoad, true);
         File.WriteAllText(JsonPath, JSONDATA);
 
+
+        
         SceneManager.LoadScene("MainGame");
     }
 

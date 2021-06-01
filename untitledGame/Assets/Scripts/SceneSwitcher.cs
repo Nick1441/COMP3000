@@ -14,6 +14,8 @@ public class SceneSwitcher : MonoBehaviour
 
     public int LastChestLocation;
 
+    public int PlayerAmount = 0;
+
     void Start()
     {
         DontDestroyOnLoad(this);

@@ -17,6 +17,13 @@ TagManager:
   - BuyWayPoint
   - BuyText
   - SPLITTERCONTROL
+  - 1
+  - 2
+  - 3
+  - 4
+  - Floor
+  - Wall
+  - CD
   layers:
   - Default
   - TransparentFX
@@ -26,10 +33,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - 1
+  - 2
+  - 3
+  - 4
   - 
   - 
   - 
