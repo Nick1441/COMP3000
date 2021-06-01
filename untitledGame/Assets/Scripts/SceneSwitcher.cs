@@ -16,6 +16,12 @@ public class SceneSwitcher : MonoBehaviour
 
     public int PlayerAmount = 0;
 
+    public int F1 = 0;
+    public int F2 = 0;
+    public int F3 = 0;
+    public int F4 = 0;
+
+
     void Start()
     {
         DontDestroyOnLoad(this);

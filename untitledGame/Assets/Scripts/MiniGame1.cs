@@ -40,11 +40,6 @@ public class MiniGame1 : MonoBehaviour
         {
             if (other.layer != PlayerLayer)
             {
-                //this.transform.GetChild(0).GetComponent<BoxCollider>().enabled = false;
-                //Destroy(other);
-                //Debug.Log(PlayerNumber + " Hit " + other.transform.parent.GetComponent<MiniGame1>().PlayerNumber);
-
-
                 hit.Invoke(PlayerNumber, int.Parse(other.tag));
             }
 

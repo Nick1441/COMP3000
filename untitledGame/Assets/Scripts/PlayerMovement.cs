@@ -53,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
     float MovementTime = 0;
     [Space]
     public GameObject SplitterText;
+    public GameObject SplitterText1;
+    public GameObject SplitterText2;
     bool Splitting = false;
     public int SplitterNumber = 0;
     GameObject SplitterControler;
@@ -75,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
         BuyText = GameObject.FindGameObjectWithTag("BuyText").GetComponent<Text>();
 
         SplitterText.SetActive(false);
+        SplitterText1.SetActive(false);
+        SplitterText2.SetActive(false);
         SplitterControler = GameObject.FindGameObjectWithTag("SPLITTERCONTROL");
     }
 
@@ -109,6 +113,8 @@ public class PlayerMovement : MonoBehaviour
             Splitting = false;
             SpillterExit(0);
             SplitterText.SetActive(false);
+            SplitterText1.SetActive(false);
+            SplitterText2.SetActive(false);
         }
 
         if (Splitting && Input.GetKeyDown(KeyCode.D))
@@ -116,6 +122,8 @@ public class PlayerMovement : MonoBehaviour
             Splitting = false;
             SpillterExit(1);
             SplitterText.SetActive(false);
+            SplitterText1.SetActive(false);
+            SplitterText2.SetActive(false);
         }
 
         //Skip Buyinh
@@ -221,6 +229,9 @@ public class PlayerMovement : MonoBehaviour
                 bool isExtra = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().ExtraKeys;
                 bool isAdvance = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().AdvanceSpaces;
 
+                bool isChest = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().ChestSpace;
+                bool isChestActive = WayPoint[WayPointNumber].GetComponent<WayPointChecker>().ChestActive;
+
                 //Space is Owned by A Player
                 if (Owned == true)
                 {
@@ -231,7 +242,15 @@ public class PlayerMovement : MonoBehaviour
                 else if ((Owned == false) && (Ownable == true))
                 {
                     //Debug.Log("TRAP FREE");
-                    TrapFree();
+                    if (SendToPlayer.GetComponent<GameController>().PlayerList[PlayerNumber - 1].Coins >= 10)
+                    {
+                        TrapFree();
+                    }
+                    else
+                    {
+                        EndTurn();
+                    }
+                    
                 }
 
                 //Space is Nothing.
@@ -257,6 +276,12 @@ public class PlayerMovement : MonoBehaviour
                 {
                     Penalty();
                 }
+                
+                else if (isChest && !isChestActive)
+                {
+                    Debug.Log("PLACE 1");
+                    EndTurn();
+                }
             }
         }
     }
@@ -279,6 +304,8 @@ public class PlayerMovement : MonoBehaviour
         if ((isSplitter == true) && (isSplitterEnd == false))
         {
             Splitter();
+
+
         }
 
         if ((isSplitter == true) && (isSplitterEnd == true))
@@ -366,7 +393,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 NewMat = mat4;
             }
-            WayPoint[WayPointNumber].GetChild(0).GetChild(0).GetComponent<MeshRenderer>().material = NewMat;
+            Material[] intmat = new Material[WayPoint[WayPointNumber].GetChild(0).GetComponent<MeshRenderer>().materials.Length];
+            intmat[0] = WayPoint[WayPointNumber].GetChild(0).GetComponent<MeshRenderer>().materials[0];
+            intmat[1] = NewMat;
+
+            WayPoint[WayPointNumber].GetChild(0).GetComponent<MeshRenderer>().materials = intmat;
             EndTurn();
         }
         else
@@ -382,6 +413,9 @@ public class PlayerMovement : MonoBehaviour
         TempMove = NumToMove;               //Remaining Moves to A Temp Move
         NumToMove = -1;                     //Setting it as No Moves Left.
         SplitterText.SetActive(true);
+        SplitterText1.SetActive(true);
+        SplitterText2.SetActive(true);
+
         Splitting = true;
     }
 
@@ -402,10 +436,19 @@ public class PlayerMovement : MonoBehaviour
         {
             WayPointNumber = SplitterWayNumber;
             NumToMove = TempMove;
+            if (NumToMove == 0)
+            {
+                Debug.Log("Ending Turn" + NumToMove);
+                EndTurn();
+            }
         }
         else
         {
             NumToMove = TempMove;
+            if (NumToMove == 0)
+            {
+                EndTurn();
+            }
         }
 }
 
@@ -450,6 +493,11 @@ public class PlayerMovement : MonoBehaviour
         {
             NumToMove = TempMove;
             OpenChestMenu.SetActive(false);
+            if (NumToMove == 0)
+            {
+                Debug.Log("Ending Turn" + NumToMove);
+                EndTurn();
+            }
 
         }
         else if (num == 2)
@@ -474,6 +522,12 @@ public class PlayerMovement : MonoBehaviour
             NumToMove = TempMove;
             OpenChestError.SetActive(false);
             OpenChestComplete.SetActive(false);
+            if (NumToMove == 0)
+            {
+                Debug.Log("Ending Turn" + NumToMove);
+                EndTurn();
+            }
+
         }
 
     }

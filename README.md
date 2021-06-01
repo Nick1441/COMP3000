@@ -19,7 +19,7 @@ This project was created using Unity 2019.4.14f1, Visual Studio Version 16.9.4 &
 ## How To Play
 
 - Head to the [Itch.io](https://nickgamesdev.itch.io/miniboard) page and downlaod the latest build!
-- or [GitHub](https://github.com/Nick1441/COMP3015-CW2) for the source code!
+- or [GitHub](https://github.com/Nick1441/COMP3000) for the source code!
 - Run the .exe and choose how many players you want to play with!
 - Roll the dice to see who goes first
 - Once the turn order has been establisted, start to make you way across the board by  

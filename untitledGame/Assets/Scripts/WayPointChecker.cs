@@ -59,7 +59,12 @@ public class WayPointChecker : MonoBehaviour
             NewMat = mat4;
         }
 
-        this.transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>().material = NewMat;
+        Material[] intmat = new Material[this.transform.GetChild(0).GetComponent<MeshRenderer>().materials.Length];
+        intmat[0] = this.transform.GetChild(0).GetComponent<MeshRenderer>().materials[0];
+        intmat[1] = NewMat;
+
+       this.transform.GetChild(0).GetComponent<MeshRenderer>().materials = intmat;
+
     }
 
     public void UpdateChestImage()

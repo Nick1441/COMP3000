@@ -60,17 +60,17 @@ public class MiniGameManager : MonoBehaviour
         else
         {
             CD.SetActive(false);
-            P1.GetComponent<MiniGame1>().NewMove = 56.82f;
-            P2.GetComponent<MiniGame1>().NewMove = 56.82f;
+            P1.GetComponent<MiniGame1>().NewMove = 65.0f;
+            P2.GetComponent<MiniGame1>().NewMove = 65.0f;
             
             if (PlayerAmount == 3 || PlayerAmount == 4)
             {
-                P3.GetComponent<MiniGame1>().NewMove = 56.82f;
+                P3.GetComponent<MiniGame1>().NewMove = 65.0f;
             }
             
             if (PlayerAmount == 4)
             {
-                P4.GetComponent<MiniGame1>().NewMove = 56.82f;
+                P4.GetComponent<MiniGame1>().NewMove = 65.0f;
             }
             
         }

@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
     public bool IgnorePlacements = true;
 
     [Header("Player Stats")]
-    public int Player1Coins = 50;
+    public int Player1Coins = 10;
     public int Player2Coins = 10;
     public int Player3Coins = 10;
     public int Player4Coins = 10;
@@ -187,7 +187,6 @@ public class GameController : MonoBehaviour
         PlayerList.Add(Player1Info);
         PlayerList.Add(Player2Info);
 
-        Text6.GetComponent<Text>().text = InData.PCount.ToString();
 
 
         if (PlayerAmount == 3)
@@ -233,7 +232,6 @@ public class GameController : MonoBehaviour
 
     public void PlayerPicker()
     {
-        //Debug.Log("PLAYER PICKER");
         if (FirstRollInt != PlayerAmount)
         {
             TextDieInit.GetComponent<Text>().enabled = false;
@@ -285,7 +283,6 @@ public class GameController : MonoBehaviour
 
     public void RollLoopText()
     {
-        //Debug.Log("ROLL LOOP TEXT");
         if (RollLoopInt != PlayerAmount)
         {
             for (int i = 0; i < PlayerList.Count; i++)
@@ -300,7 +297,6 @@ public class GameController : MonoBehaviour
             MovesLeftText2.text = TempPlayer.Name + " Rolled " + Rolled.ToString();
             
             RollNextGameObject.SetActive(true);
-            //Debug.Log(TempPlayer.PlayerNumber);
         }
         else
         {
@@ -340,22 +336,6 @@ public class GameController : MonoBehaviour
     void Update()
     {
         PlayerStats();
-
-        //Debug.Log("CROWN TARGET - " + CrownTarget);
-
-
-        Text7.GetComponent<Text>().text = PlayerList[0].Name;
-        Text8.GetComponent<Text>().text = PlayerList[1].Name;
-        if (PlayerAmount == 3)
-        {
-            Text9.GetComponent<Text>().text = PlayerList[2].Name;
-        }
-        else if (PlayerAmount == 4)
-         {
-
-            Text9.GetComponent<Text>().text = PlayerList[2].Name;
-            Text10.GetComponent<Text>().text = PlayerList[3].Name;
-        }
 
         if ((Input.GetKeyDown(KeyCode.Space)) && (FirstRoll) && (Movable))
         {
@@ -662,9 +642,26 @@ public class GameController : MonoBehaviour
         {
             if (PlayerList[i].Crowns == CrownTarget)
             {
-                Debug.Log("WINNER WINNER CHICKEN DINNER");
+                SceneSwitcher.GetComponent<SceneSwitcher>().F1 = PlayerList[0].Crowns;
+                SceneSwitcher.GetComponent<SceneSwitcher>().F2 = PlayerList[1].Crowns;
+                if (PlayerAmount == 3 || PlayerAmount == 4)
+                {
+                    SceneSwitcher.GetComponent<SceneSwitcher>().F3 = PlayerList[2].Crowns;
+                }
+                if (PlayerAmount == 4)
+                {
+                    SceneSwitcher.GetComponent<SceneSwitcher>().F4 = PlayerList[3].Crowns;
+                }
+                
+
+                Invoke("EndScene", 2.0f);
             }
         }
+    }
+
+    public void EndScene()
+    {
+        SceneManager.LoadScene("EndScene");
     }
 
     void GenerateFirstChest()
